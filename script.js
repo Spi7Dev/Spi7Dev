@@ -43,21 +43,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         currentSlide = index;
-        updateActiveStates();
+        updateActiveStates(index);
     }
 
-    function updateActiveStates() {
+    function updateActiveStates(index) {
         slides.forEach((slide, i) => {
-            if (i === currentSlide) {
-                slide.classList.add('active');
-            } else {
-                slide.classList.remove('active');
-            }
+            slide.classList.toggle('active', i === index);
         });
 
-        // Toggle arrow visibility
-        leftArrow.style.opacity = currentSlide === 0 ? '0.3' : '1';
-        rightArrow.style.opacity = currentSlide === slides.length - 1 ? '0.3' : '1';
+        // Soften arrow visibility
+        leftArrow.style.opacity = index === 0 ? '0.2' : '1';
+        rightArrow.style.opacity = index === slides.length - 1 ? '0.2' : '1';
     }
 
     leftArrow.addEventListener('click', () => scrollToSlide(currentSlide - 1));
@@ -69,49 +65,43 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowLeft') scrollToSlide(currentSlide - 1);
     });
 
-    // --- Interaction Observer for Peeking Effect ---
+    // --- Intersection Observer for Active Slide State ---
     const observerOptions = {
         root: slider,
-        threshold: 0.5
+        threshold: 0.6
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('active');
                 const index = Array.from(slides).indexOf(entry.target);
                 currentSlide = index;
-                updateActiveStates();
+                updateActiveStates(index);
             }
         });
     }, observerOptions);
 
     slides.forEach(slide => observer.observe(slide));
 
-    // --- Parallax Effect on Mesh Gradient ---
+    // --- Parallax Mesh Gradient ---
     const mesh = document.querySelector('.bg-mesh');
     window.addEventListener('mousemove', (e) => {
         const x = (e.clientX / window.innerWidth) * 100;
         const y = (e.clientY / window.innerHeight) * 100;
         
         mesh.style.background = `
-            radial-gradient(circle at ${x}% ${y}%, rgba(255, 42, 42, 0.15) 0%, transparent 40%),
-            radial-gradient(circle at ${100 - x}% ${100 - y}%, rgba(255, 42, 42, 0.1) 0%, transparent 40%)
+            radial-gradient(circle at ${x}% ${y}%, rgba(255, 42, 42, 0.1) 0%, transparent 40%),
+            radial-gradient(circle at ${100 - x}% ${100 - y}%, rgba(255, 42, 42, 0.05) 0%, transparent 40%)
         `;
     });
 
-    // --- Typing Effect Subtitle (Optional) ---
-    // Kept for future use if needed, but unobserved for now as badges are static.
-
-    // --- Smooth Navbar Blur ---
-    slider.addEventListener('scroll', () => {
-        const nav = document.querySelector('.navbar');
-        if (slider.scrollLeft > 50) {
-            nav.style.transform = 'translateX(-50%) translateY(-10px)';
-            nav.style.background = 'rgba(5, 5, 5, 0.8)';
+    // --- Scroll Lock on Slider (Prevent vertical while horizontal) ---
+    slider.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+            // Natural horizontal scroll handled by browser
         } else {
-            nav.style.transform = 'translateX(-50%) translateY(0)';
-            nav.style.background = 'rgba(10, 10, 10, 0.6)';
+            // If user scrolls vertically, we could translate it to horizontal if desired
+            // But snap-scroll handles basic behavior well
         }
     });
 
