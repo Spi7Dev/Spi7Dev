@@ -3,59 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spi7.Dev | Portfolio</title>
+    <title>Spi7.Dev | Premium SaaS Extensions</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
+    <div class="bg-mesh"></div>
+    <div class="dot-matrix"></div>
+
     <nav class="navbar">
-        <div class="logo"><span>&lt;</span>Spi7.Dev<span>/&gt;</span></div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+        <a href="#" class="logo">Spi7<span>.Dev</span></a>
+        <div class="nav-links">
+            <a href="#prod-1">FocusFlow</a>
+            <a href="#prod-2">ColorCraft</a>
+            <a href="#contact">Contact</a>
+            <a href="https://github.com" target="_blank">GitHub</a>
+        </div>
     </nav>
 
-    <div class="snap-container">
-        <section id="home" class="snap-section">
-            <div class="hero-content">
-                <h1>Building sleek <span class="highlight">digital experiences.</span></h1>
-                <p>Hi, I'm Spi7. I'm a Web Developer specializing in high-performance digital solutions.</p>
-                <div class="social-icons">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
+    <div class="nav-arrow arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+    <div class="nav-arrow arrow-right"><i class="fa-solid fa-chevron-right"></i></div>
+
+    <div class="slider-container">
+
+        <!-- Slide 1: FocusFlow -->
+        <section class="slide" id="prod-1">
+            <div class="landing-content slide-inner">
+                <div class="hero">
+                    <div class="hero-text">
+                        <div class="badge">Featured Extension 01</div>
+                        <h1>FocusFlow<br/><span class="text-red">Deep Work</span></h1>
+                        <p>The ultimate developer-first browser extension for deep work analysis and performance mapping directly in your workflow.</p>
+                        <a href="#" class="install-btn">
+                            <span class="fa-brands fa-chrome"></span>
+                            <div class="btn-text">Download for Chrome</div>
+                        </a>
+                        <div style="margin-top: 32px; display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 10px; font-weight: 700; color: #555; text-transform: uppercase;">99.9% Uptime</span>
+                            <span style="font-size: 10px; font-weight: 700; color: #555; text-transform: uppercase;">Low Latency</span>
+                        </div>
+                    </div>
+                    <div class="mockup-container">
+                        <div class="mockup-card">
+                            <div style="display: flex; gap: 8px; margin-bottom: 24px; opacity: 0.3;">
+                                <div style="width: 8px; height: 8px; border-radius: 50%; background: #ff2a2a;"></div>
+                                <div style="width: 8px; height: 8px; border-radius: 50%; background: #fff;"></div>
+                                <div style="width: 8px; height: 8px; border-radius: 50%; background: #fff;"></div>
+                            </div>
+                            <div style="height: 1px; background: rgba(255,255,255,0.05); margin-bottom: 24px;"></div>
+                            <div style="padding: 20px; border: 1px solid rgba(255,42,42,0.2); border-radius: 12px; text-align: center;">
+                                <span style="font-family: monospace; font-size: 10px; color: #ff2a2a; letter-spacing: 2px;">VISUALIZING CONTEXT...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features">
+                    <div class="feature-card">
+                        <i class="fa-solid fa-bolt"></i>
+                        <h3 style="font-size: 18px; margin-bottom: 12px;">Turbo Tab</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">Automatically hibernates unused tabs to save memory usage by 40%.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <h3 style="font-size: 18px; margin-bottom: 12px;">Ad-Free</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">Native ad-blocking built at the network level for pure browsing speed.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fa-solid fa-clock"></i>
+                        <h3 style="font-size: 18px; margin-bottom: 12px;">Sync</h3>
+                        <p style="font-size: 13px; color: #666; line-height: 1.6;">Move 1:1 snapshots of your workspace across browser sessions.</p>
+                    </div>
+                </div>
+
+                <div class="mini-footer">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="snap-section">
-            <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3>Project Alpha</h3>
-                    <p>High-performance web application.</p>
+        <!-- Slide 2: ColorCraft -->
+        <section class="slide" id="prod-2">
+            <div class="landing-content slide-inner">
+                <div class="hero">
+                    <div class="hero-text">
+                        <div class="badge">Creative Tool 02</div>
+                        <h1>ColorCraft<br/><span class="text-red">Harmony</span></h1>
+                        <p>Capture any palette, anywhere. The most accurate color picker for developers who demand luxury aesthetics.</p>
+                        <a href="#" class="install-btn">
+                            <span class="fa-brands fa-firefox"></span>
+                            <div class="btn-text">Download for Firefox</div>
+                        </a>
+                    </div>
+                    <div class="mockup-container">
+                        <div class="mockup-card" style="border-color: rgba(255,255,255,0.05); box-shadow: none;">
+                            <div style="width: 100%; height: 100%; border: 1px dashed rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 10px; color: #333;">UI SNAPSHOT</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="project-card">
-                    <h3>Beta Dashboard</h3>
-                    <p>Minimalist UI/UX design.</p>
+
+                <div class="mini-footer">
+                    <a href="#">Security Audit</a>
+                    <a href="#">Terms of Service</a>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="snap-section">
-            <div class="contact-box">
-                <h2>Let's Work Together</h2>
-                <p>Available for freelance opportunities.</p>
-                <a href="mailto:hello@spi7.dev" class="btn">Say Hello</a>
+        <!-- Slide 3: Global Contact -->
+        <section class="slide" id="contact">
+            <div class="landing-content slide-inner" style="max-width: 600px; text-align: center;">
+                <div class="badge">Contact</div>
+                <h1>Let's build<br/><span class="text-red">together.</span></h1>
+                <p style="margin-bottom: 48px;">We're building the future of modern developer tools. Reach out for collaborations or enterprise solutions.</p>
+                
+                <form style="display: flex; flex-direction: column; gap: 16px; text-align: left;">
+                    <input type="email" placeholder="Your email" style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; outline: none; font-size: 14px;">
+                    <textarea placeholder="Your message" rows="4" style="padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: #fff; outline: none; resize: none; font-size: 14px;"></textarea>
+                    <button type="submit" class="install-btn" style="justify-content: center; background: #ff2a2a; color: #fff;">Send Message</button>
+                </form>
+
+                <div class="mini-footer" style="justify-content: center;">
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Press</a>
+                </div>
             </div>
         </section>
-    </div>
 
-    <div class="nav-arrows">
-        <div class="arrow up" id="prevSection"><i class="fas fa-chevron-up"></i></div>
-        <div class="arrow down" id="nextSection"><i class="fas fa-chevron-down"></i></div>
     </div>
 
     <script src="script.js"></script>
