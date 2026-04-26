@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.querySelector('.slider-container');
-    const slides = document.querySelectorAll('.slide');
-    const leftArrow = document.querySelector('.arrow-left');
-    const rightArrow = document.querySelector('.arrow-right');
     const installBtns = document.querySelectorAll('.install-btn');
 
     // --- Browser Detection ---
@@ -22,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         installBtns.forEach(btn => {
             const btnText = btn.querySelector('.btn-text');
-            if (btnText) {
+            if (btnText && btnText.textContent.trim() !== "Coming Soon") {
                 btnText.textContent = `Download for ${browserName}`;
             }
         });
@@ -30,79 +26,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateInstallButtons();
 
-    // --- Horizontal Slider Logic ---
-    let currentSlide = 0;
-
-    function scrollToSlide(index) {
-        if (index < 0 || index >= slides.length) return;
-        
-        slides[index].scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-        });
-        
-        currentSlide = index;
-        updateActiveStates(index);
-    }
-
-    function updateActiveStates(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
-
-        // Soften arrow visibility
-        leftArrow.style.opacity = index === 0 ? '0.2' : '1';
-        rightArrow.style.opacity = index === slides.length - 1 ? '0.2' : '1';
-    }
-
-    leftArrow.addEventListener('click', () => scrollToSlide(currentSlide - 1));
-    rightArrow.addEventListener('click', () => scrollToSlide(currentSlide + 1));
-
-    // --- Keyboard Navigation ---
-    window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') scrollToSlide(currentSlide + 1);
-        if (e.key === 'ArrowLeft') scrollToSlide(currentSlide - 1);
-    });
-
-    // --- Intersection Observer for Active Slide State ---
-    const observerOptions = {
-        root: slider,
-        threshold: 0.6
+    // --- Scroll Reveal Logic ---
+    const revealOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
     };
 
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const index = Array.from(slides).indexOf(entry.target);
-                currentSlide = index;
-                updateActiveStates(index);
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, revealOptions);
 
-    slides.forEach(slide => observer.observe(slide));
+    const revealElements = document.querySelectorAll('.v-section, .product-card, .feature-card, .pricing-card');
+    revealElements.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+        revealObserver.observe(el);
+    });
+
+    // --- Horizontal Scroll Logic ---
+    const horizontalTrigger = document.getElementById('horizontal-trigger');
+    const panelTrack = document.getElementById('panel-track');
+    const panels = document.querySelectorAll('.panel');
+
+    if (horizontalTrigger && panelTrack && panels.length > 0) {
+        // Set dynamic height for the scroll trigger
+        // This allows the user to scroll vertically while the panels move horizontally
+        const updateContainerHeight = () => {
+            const trackWidth = panelTrack.scrollWidth;
+            const viewportWidth = window.innerWidth;
+            const horizontalScrollLength = trackWidth - viewportWidth;
+            
+            // The height of the container will be the viewport height + the horizontal distance to travel
+            horizontalTrigger.style.height = `${horizontalScrollLength + window.innerHeight}px`;
+        };
+
+        window.addEventListener('resize', updateContainerHeight);
+        updateContainerHeight();
+
+        // Handle the scroll and translate the track
+        window.addEventListener('scroll', () => {
+            const offsetTop = horizontalTrigger.offsetTop;
+            const scrollTop = window.pageYOffset;
+            const scrollDistance = scrollTop - offsetTop;
+            
+            if (scrollDistance >= 0 && scrollDistance <= (horizontalTrigger.offsetHeight - window.innerHeight)) {
+                panelTrack.style.transform = `translateX(-${scrollDistance}px)`;
+            } else if (scrollDistance < 0) {
+                panelTrack.style.transform = `translateX(0px)`;
+            }
+        });
+    }
 
     // --- Parallax Mesh Gradient ---
     const mesh = document.querySelector('.bg-mesh');
-    window.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth) * 100;
-        const y = (e.clientY / window.innerHeight) * 100;
-        
-        mesh.style.background = `
-            radial-gradient(circle at ${x}% ${y}%, rgba(255, 42, 42, 0.1) 0%, transparent 40%),
-            radial-gradient(circle at ${100 - x}% ${100 - y}%, rgba(255, 42, 42, 0.05) 0%, transparent 40%)
-        `;
-    });
-
-    // --- Scroll Lock on Slider (Prevent vertical while horizontal) ---
-    slider.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-            // Natural horizontal scroll handled by browser
-        } else {
-            // If user scrolls vertically, we could translate it to horizontal if desired
-            // But snap-scroll handles basic behavior well
-        }
-    });
-
+    if (mesh) {
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            mesh.style.background = `
+                radial-gradient(circle at ${x}% ${y}%, rgba(255, 42, 42, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at ${100 - x}% ${100 - y}%, rgba(255, 42, 42, 0.05) 0%, transparent 40%)
+            `;
+        });
+    }
 });
