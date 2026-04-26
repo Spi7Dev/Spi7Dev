@@ -1,221 +1,100 @@
-/* ============================================
-   SPi7.DEV — SCRIPT
-   Horizontal Slider · Browser Detection · Animations
-   ============================================ */
+document.addEventListener('DOMContentLoaded', () => {
+    const installBtns = document.querySelectorAll('.install-btn');
 
-(function () {
+    // --- Browser Detection ---
+    function updateInstallButtons() {
+        const userAgent = navigator.userAgent;
+        let browserName = "Browser";
 
-    /* ─── STATE ──────────────────────────── */
-    let currentIndex = 0;
-    const TOTAL_SLIDES = 4;
-
-    const track       = document.getElementById('sliderTrack');
-    const prevBtn     = document.getElementById('prevBtn');
-    const nextBtn     = document.getElementById('nextBtn');
-    const indicators  = document.querySelectorAll('.indicator');
-    const counterEl   = document.getElementById('counterCurrent');
-    const labelEl     = document.getElementById('indicatorLabel');
-
-    const SLIDE_LABELS = ['Home', 'Project Alpha', 'Beta Dashboard', 'Contact'];
-
-    /* ─── BROWSER DETECTION ──────────────── */
-    function detectBrowser() {
-        const ua  = navigator.userAgent;
-        const nav = navigator;
-        if (ua.includes('Edg/'))                    return { name: 'Edge',    fa: 'fa-edge' };
-        if (ua.includes('Firefox/'))                return { name: 'Firefox', fa: 'fa-firefox-browser' };
-        if (ua.includes('OPR/') || ua.includes('Opera/')) return { name: 'Opera', fa: 'fa-opera' };
-        if (nav.brave || ua.includes('Brave'))      return { name: 'Brave',   fa: 'fa-shield-alt' };
-        if (ua.includes('Chrome/'))                 return { name: 'Chrome',  fa: 'fa-chrome' };
-        return { name: 'Chrome', fa: 'fa-chrome' };
-    }
-
-    function applyBrowserBtn(iconId, textId, btnId) {
-        const browser = detectBrowser();
-        const iconEl  = document.getElementById(iconId);
-        const textEl  = document.getElementById(textId);
-        if (iconEl) { iconEl.className = `fab ${browser.fa}`; }
-        if (textEl) { textEl.textContent = `Download for ${browser.name}`; }
-    }
-
-    applyBrowserBtn('heroIcon',  'heroText',   'heroInstallBtn');
-    applyBrowserBtn('alphaIcon', 'alphaText',  'alphaInstallBtn');
-    applyBrowserBtn('betaIcon',  'betaText',   'betaInstallBtn');
-
-    /* ─── SLIDE WIDTH ────────────────────── */
-    function getSlideStep() {
-        const peek = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--peek')) || 80;
-        const gap  = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--slide-gap')) || 24;
-        return (window.innerWidth - peek) + gap;
-    }
-
-    /* ─── GO TO SLIDE ────────────────────── */
-    function goTo(index, animate) {
-        index = Math.max(0, Math.min(TOTAL_SLIDES - 1, index));
-
-        // Toggle animation
-        if (animate === false) {
-            track.style.transition = 'none';
-        } else {
-            track.style.transition = 'transform 0.85s cubic-bezier(0.77, 0, 0.175, 1)';
+        if (userAgent.indexOf("Chrome") > -1 && userAgent.indexOf("Edg") === -1 && userAgent.indexOf("Brave") === -1) {
+            browserName = "Chrome";
+        } else if (userAgent.indexOf("Edg") > -1) {
+            browserName = "Edge";
+        } else if (userAgent.indexOf("Firefox") > -1) {
+            browserName = "Firefox";
+        } else if (userAgent.indexOf("Brave") > -1) {
+            browserName = "Brave";
         }
 
-        const offset = index * getSlideStep();
-        track.style.transform = `translateX(-${offset}px)`;
-        currentIndex = index;
-
-        updateUI();
-        triggerSlideAnimations(index);
-    }
-
-    /* ─── UPDATE UI ──────────────────────── */
-    function updateUI() {
-        // Counter
-        if (counterEl) counterEl.textContent = String(currentIndex + 1).padStart(2, '0');
-
-        // Label
-        if (labelEl) labelEl.textContent = SLIDE_LABELS[currentIndex] || '';
-
-        // Indicators
-        indicators.forEach((dot, i) => {
-            dot.classList.toggle('active', i === currentIndex);
-        });
-
-        // Arrows
-        if (prevBtn) prevBtn.disabled = currentIndex === 0;
-        if (nextBtn) nextBtn.disabled = currentIndex === TOTAL_SLIDES - 1;
-
-        // Nav links active state
-        document.querySelectorAll('.nav-links a[data-slide]').forEach(a => {
-            const si = parseInt(a.getAttribute('data-slide'));
-            a.style.color = si === currentIndex ? 'var(--accent)' : '';
+        installBtns.forEach(btn => {
+            const btnText = btn.querySelector('.btn-text');
+            if (btnText && btnText.textContent.trim() !== "Coming Soon") {
+                btnText.textContent = `Download for ${browserName}`;
+            }
         });
     }
 
-    /* ─── SLIDE ANIMATIONS ───────────────── */
-    function triggerSlideAnimations(index) {
-        // Reset all slides
-        document.querySelectorAll('.slide').forEach(slide => {
-            slide.classList.remove('active');
-        });
+    updateInstallButtons();
 
-        // Activate current slide (triggers CSS transitions)
-        const currentSlide = document.getElementById(`slide-${index}`);
-        if (currentSlide) {
-            // Force reflow so transitions re-fire on revisit
-            currentSlide.querySelectorAll('.anim-reveal').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(22px)';
-            });
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    currentSlide.classList.add('active');
-                });
-            });
-        }
-    }
-
-    /* ─── ARROW BUTTONS ──────────────────── */
-    if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIndex + 1));
-    if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIndex - 1));
-
-    /* ─── INDICATORS ─────────────────────── */
-    indicators.forEach(dot => {
-        dot.addEventListener('click', () => {
-            const i = parseInt(dot.getAttribute('data-index'));
-            goTo(i);
-        });
-    });
-
-    /* ─── NAVBAR SLIDE LINKS ─────────────── */
-    document.querySelectorAll('[data-slide]').forEach(el => {
-        el.addEventListener('click', (e) => {
-            e.preventDefault();
-            const i = parseInt(el.getAttribute('data-slide'));
-            goTo(i);
-        });
-    });
-
-    /* ─── KEYBOARD ───────────────────────── */
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  goTo(currentIndex + 1);
-        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')    goTo(currentIndex - 1);
-    });
-
-    /* ─── TOUCH / SWIPE ──────────────────── */
-    let touchStartX = null;
-    let touchStartY = null;
-
-    document.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-    }, { passive: true });
-
-    document.addEventListener('touchend', (e) => {
-        if (touchStartX === null) return;
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        const dy = e.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-            if (dx < 0) goTo(currentIndex + 1);
-            else        goTo(currentIndex - 1);
-        }
-        touchStartX = null;
-        touchStartY = null;
-    }, { passive: true });
-
-    /* ─── TRACKPAD WHEEL ─────────────────── */
-    let wheelLocked = false;
-    document.addEventListener('wheel', (e) => {
-        if (wheelLocked) return;
-
-        const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-        if (Math.abs(delta) < 20) return; // ignore small movements
-
-        if (delta > 0) goTo(currentIndex + 1);
-        else           goTo(currentIndex - 1);
-
-        wheelLocked = true;
-        setTimeout(() => { wheelLocked = false; }, 900);
-    }, { passive: true });
-
-    /* ─── RESIZE ─────────────────────────── */
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            goTo(currentIndex, false);
-        }, 100);
-    });
-
-    /* ─── GHOST BTN (explore) ────────────── */
-    const exploreBtn = document.getElementById('heroExplore');
-    if (exploreBtn) exploreBtn.addEventListener('click', () => goTo(1));
-
-    /* ─── CONTACT FORM ───────────────────── */
-    window.handleFormSubmit = function (e) {
-        e.preventDefault();
-        const btn = e.target.querySelector('.pill-btn');
-        const label = btn.querySelector('.pill-label');
-        const original = label.textContent;
-
-        btn.style.pointerEvents = 'none';
-        label.textContent = 'Message Sent ✓';
-        btn.style.background = '#28c840';
-
-        setTimeout(() => {
-            label.textContent = original;
-            btn.style.background = '';
-            btn.style.pointerEvents = '';
-            e.target.reset();
-        }, 3000);
+    // --- Scroll Reveal Logic ---
+    const revealOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
     };
 
-    /* ─── INIT ───────────────────────────── */
-    goTo(0, false);
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = "1";
+                entry.target.style.transform = "translateY(0)";
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, revealOptions);
 
-    // Small delay so first slide animates in on load
-    setTimeout(() => {
-        triggerSlideAnimations(0);
-    }, 100);
+    const revealElements = document.querySelectorAll('.v-section, .product-card, .feature-card, .pricing-card');
+    revealElements.forEach(el => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)";
+        revealObserver.observe(el);
+    });
 
-})();
+    // --- Horizontal Scroll Logic ---
+    const horizontalTrigger = document.getElementById('horizontal-trigger');
+    const panelTrack = document.getElementById('panel-track');
+    const panels = document.querySelectorAll('.panel');
+
+    if (horizontalTrigger && panelTrack && panels.length > 0) {
+        // Set dynamic height for the scroll trigger
+        // This allows the user to scroll vertically while the panels move horizontally
+        const updateContainerHeight = () => {
+            const trackWidth = panelTrack.scrollWidth;
+            const viewportWidth = window.innerWidth;
+            const horizontalScrollLength = trackWidth - viewportWidth;
+            
+            // The height of the container will be the viewport height + the horizontal distance to travel
+            horizontalTrigger.style.height = `${horizontalScrollLength + window.innerHeight}px`;
+        };
+
+        window.addEventListener('resize', updateContainerHeight);
+        updateContainerHeight();
+
+        // Handle the scroll and translate the track
+        window.addEventListener('scroll', () => {
+            const offsetTop = horizontalTrigger.offsetTop;
+            const scrollTop = window.pageYOffset;
+            const scrollDistance = scrollTop - offsetTop;
+            
+            if (scrollDistance >= 0 && scrollDistance <= (horizontalTrigger.offsetHeight - window.innerHeight)) {
+                panelTrack.style.transform = `translateX(-${scrollDistance}px)`;
+            } else if (scrollDistance < 0) {
+                panelTrack.style.transform = `translateX(0px)`;
+            }
+        });
+    }
+
+    // --- Parallax Mesh Gradient ---
+    const mesh = document.querySelector('.bg-mesh');
+    if (mesh) {
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            mesh.style.background = `
+                radial-gradient(circle at ${x}% ${y}%, rgba(255, 42, 42, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at ${100 - x}% ${100 - y}%, rgba(255, 42, 42, 0.05) 0%, transparent 40%)
+            `;
+        });
+    }
+});

@@ -3,397 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spi7.Dev | Developer Extensions</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Spi7.Dev | Premium SaaS Extensions</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-    <div class="noise-overlay"></div>
+    <div class="bg-mesh"></div>
+    <div class="dot-matrix"></div>
 
-    <!-- Navbar -->
-    <nav class="navbar" id="navbar">
-        <div class="logo">
-            <span class="logo-bracket">&lt;</span>Spi7<span class="logo-dot">.</span>Dev<span class="logo-bracket">/&gt;</span>
+    <nav class="navbar">
+        <a href="/" class="logo">Spi7<span>.Dev</span></a>
+        <div class="nav-links">
+            <a href="/focusflow.html">FocusFlow</a>
+            <a href="/colorcraft.html">ColorCraft</a>
+            <a href="/contextme.html">ContextMe</a>
+            <a href="https://github.com" target="_blank"><i class="fa-brands fa-github"></i></a>
         </div>
-        <ul class="nav-links">
-            <li><a href="#" data-slide="0">Home</a></li>
-            <li><a href="#" data-slide="1">Products</a></li>
-            <li><a href="#" data-slide="3">Contact</a></li>
-        </ul>
-        <a href="https://github.com" target="_blank" class="nav-github">
-            <i class="fab fa-github"></i> GitHub
-        </a>
     </nav>
 
-    <!-- Slide Indicators (left side) -->
-    <div class="slide-indicators" id="slideIndicators">
-        <button class="indicator active" data-index="0"></button>
-        <button class="indicator" data-index="1"></button>
-        <button class="indicator" data-index="2"></button>
-        <button class="indicator" data-index="3"></button>
-        <div class="indicator-label" id="indicatorLabel">Home</div>
-    </div>
+    <header class="page-header">
+        <div class="badge">Spi7.Dev Studio</div>
+        <h1>Developer-First<br/><span class="text-red">Extensions.</span></h1>
+        <p class="hero-desc" style="margin: 30px auto;">We build elite, open-source browser extensions designed for high-performance developer workflows.</p>
+    </header>
 
-    <!-- Slide Counter (bottom left) -->
-    <div class="slide-counter-wrap">
-        <span class="counter-current" id="counterCurrent">01</span>
-        <span class="counter-sep">/</span>
-        <span class="counter-total">04</span>
-    </div>
+    <section class="product-grid">
+        <!-- FocusFlow Card -->
+        <a href="/focusflow.html" class="product-card">
+            <div class="product-card-preview">
+                <i class="fa-solid fa-bolt" style="font-size: 40px; color: var(--accent-red);"></i>
+            </div>
+            <h3>FocusFlow</h3>
+            <p>Deep work analysis and performance mapping directly in your browser workflow.</p>
+            <div class="badge">Productivity</div>
+        </a>
 
-    <!-- Arrow Navigation -->
-    <div class="nav-arrows">
-        <button class="arrow-btn prev" id="prevBtn" aria-label="Previous slide">
-            <i class="fas fa-chevron-left"></i>
-        </button>
-        <button class="arrow-btn next" id="nextBtn" aria-label="Next slide">
-            <i class="fas fa-chevron-right"></i>
-        </button>
-    </div>
+        <!-- ColorCraft Card -->
+        <a href="/colorcraft.html" class="product-card">
+            <div class="product-card-preview">
+                <i class="fa-solid fa-palette" style="font-size: 40px; color: var(--accent-red);"></i>
+            </div>
+            <h3>ColorCraft</h3>
+            <p>Premium color extraction and harmony generator for modern web designers.</p>
+            <div class="badge">Design</div>
+        </a>
 
-    <!-- Main Slider -->
-    <div class="slider-viewport" id="sliderViewport">
-        <div class="slider-track" id="sliderTrack">
+        <!-- ContextMe Card -->
+        <a href="/contextme.html" class="product-card">
+            <div class="product-card-preview">
+                <i class="fa-solid fa-brain" style="font-size: 40px; color: var(--accent-red);"></i>
+            </div>
+            <h3>ContextMe</h3>
+            <p>AI-powered tab organization that understands your project context automatically.</p>
+            <div class="badge">AI Support</div>
+        </a>
+    </section>
 
-            <!-- SLIDE 0: HOME -->
-            <section class="slide" id="slide-0" data-index="0" data-label="Home">
-                <div class="slide-inner">
-                    <div class="glow-orb" style="top:15%;left:10%;width:500px;height:500px;opacity:0.18;"></div>
-                    <div class="glow-orb" style="top:55%;left:65%;width:350px;height:350px;opacity:0.10;"></div>
+    <footer class="global-footer">
+        <div class="footer-content">
+            <div class="logo">Spi7<span>.Dev</span></div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/focusflow">FocusFlow</a>
+                <a href="/colorcraft">ColorCraft</a>
+                <a href="/contextme">ContextMe</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
 
-                    <div class="two-col">
-                        <!-- LEFT -->
-                        <div class="col-text">
-                            <div class="eyebrow anim-reveal">
-                                <span class="eyebrow-dot"></span> Browser Extensions &amp; Dev Tools
-                            </div>
-                            <h1 class="hero-title">
-                                <span class="line anim-reveal" style="--d:0.05s">Build the</span>
-                                <span class="line highlight-text anim-reveal" style="--d:0.15s">web you</span>
-                                <span class="line anim-reveal" style="--d:0.25s">deserve.</span>
-                            </h1>
-                            <p class="body-text anim-reveal" style="--d:0.35s">
-                                Premium browser extensions crafted for speed, elegance, and obsessive attention to detail. Made for developers who settle for nothing less.
-                            </p>
-                            <div class="cta-group anim-reveal" style="--d:0.45s">
-                                <button class="pill-btn" id="heroInstallBtn">
-                                    <span class="pill-icon"><i class="fab fa-chrome" id="heroIcon"></i></span>
-                                    <span class="pill-label" id="heroText">Download for Chrome</span>
-                                    <span class="pill-arr"><i class="fas fa-arrow-right"></i></span>
-                                </button>
-                                <button class="ghost-btn" id="heroExplore">
-                                    View Products <i class="fas fa-arrow-right"></i>
-                                </button>
-                            </div>
-                            <div class="trust-row anim-reveal" style="--d:0.55s">
-                                <div class="trust-stat"><strong>4,200+</strong><small>Users</small></div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-stat"><strong>4.9★</strong><small>Rating</small></div>
-                                <div class="trust-divider"></div>
-                                <div class="trust-stat"><strong>Free</strong><small>Core tools</small></div>
-                            </div>
-                        </div>
+</body>
 
-                        <!-- RIGHT -->
-                        <div class="col-visual anim-reveal" style="--d:0.2s">
-                            <div class="browser-mock">
-                                <div class="bmock-bar">
-                                    <div class="bmock-dots">
-                                        <span></span><span></span><span></span>
-                                    </div>
-                                    <div class="bmock-url">
-                                        <i class="fas fa-lock"></i>
-                                        spi7.dev/ext
-                                    </div>
-                                    <div class="bmock-ext"><i class="fas fa-bolt"></i></div>
-                                </div>
-                                <div class="bmock-body">
-                                    <div class="popup-wrap">
-                                        <div class="popup-head">
-                                            <div class="popup-ico"><i class="fas fa-bolt"></i></div>
-                                            <div class="popup-meta">
-                                                <strong>Spi7 Extension</strong>
-                                                <small>Active on this page</small>
-                                            </div>
-                                            <div class="toggle on"></div>
-                                        </div>
-                                        <div class="popup-stats-row">
-                                            <div class="pstat"><div class="pstat-n">1.3s</div><div class="pstat-l">Saved</div></div>
-                                            <div class="pstat"><div class="pstat-n">47</div><div class="pstat-l">Actions</div></div>
-                                            <div class="pstat"><div class="pstat-n">99%</div><div class="pstat-l">Uptime</div></div>
-                                        </div>
-                                        <div class="popup-bars">
-                                            <div class="pb-row">
-                                                <span>Performance</span>
-                                                <div class="pb-track"><div class="pb-fill" style="width:92%"></div></div>
-                                                <span class="pb-num">92</span>
-                                            </div>
-                                            <div class="pb-row">
-                                                <span>Speed</span>
-                                                <div class="pb-track"><div class="pb-fill" style="width:87%"></div></div>
-                                                <span class="pb-num">87</span>
-                                            </div>
-                                            <div class="pb-row">
-                                                <span>Reliability</span>
-                                                <div class="pb-track"><div class="pb-fill" style="width:98%"></div></div>
-                                                <span class="pb-num">98</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="visual-glow"></div>
-                        </div>
-                    </div>
-
-                    <div class="swipe-hint">
-                        <span>Swipe to explore products</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 1: PRODUCT — PROJECT ALPHA -->
-            <section class="slide" id="slide-1" data-index="1" data-label="Project Alpha">
-                <div class="slide-inner">
-                    <div class="glow-orb" style="top:25%;left:55%;width:400px;height:400px;opacity:0.2;"></div>
-
-                    <div class="two-col">
-                        <div class="col-text">
-                            <div class="prod-num anim-reveal">01</div>
-                            <div class="eyebrow anim-reveal"><span class="eyebrow-dot"></span> Browser Extension</div>
-                            <h2 class="prod-title anim-reveal" style="--d:0.1s">
-                                Project <span class="highlight-text">Alpha</span>
-                            </h2>
-                            <p class="body-text anim-reveal" style="--d:0.2s">
-                                A high-performance web enhancer with intelligent caching, script blocking, and real-time analytics. Built for developers who demand speed.
-                            </p>
-                            <button class="pill-btn anim-reveal" style="--d:0.3s" id="alphaInstallBtn">
-                                <span class="pill-icon"><i class="fab fa-chrome" id="alphaIcon"></i></span>
-                                <span class="pill-label" id="alphaText">Download for Chrome</span>
-                                <span class="pill-arr"><i class="fas fa-arrow-right"></i></span>
-                            </button>
-                            <div class="stars-row anim-reveal" style="--d:0.4s">
-                                <div class="stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                </div>
-                                <span>4.8 &middot; 2,400+ users</span>
-                            </div>
-                        </div>
-
-                        <div class="col-visual anim-reveal" style="--d:0.15s">
-                            <div class="ext-card-glass">
-                                <div class="ecg-header">
-                                    <div class="ecg-icon"><i class="fas fa-bolt"></i></div>
-                                    <div class="ecg-meta"><strong>Alpha</strong><small>v2.1.0 &middot; Active</small></div>
-                                    <div class="ecg-badge">PRO</div>
-                                </div>
-                                <div class="ecg-ring-wrap">
-                                    <svg viewBox="0 0 120 120" class="ecg-ring">
-                                        <circle cx="60" cy="60" r="50" class="ring-bg"/>
-                                        <circle cx="60" cy="60" r="50" class="ring-bar" style="stroke-dasharray:275 314;"/>
-                                    </svg>
-                                    <div class="ring-inner">
-                                        <div class="ring-val">87<sup>%</sup></div>
-                                        <div class="ring-sub">Score</div>
-                                    </div>
-                                </div>
-                                <div class="ecg-list">
-                                    <div class="ecg-item"><i class="fas fa-ban"></i><span>Scripts blocked</span><b>14</b></div>
-                                    <div class="ecg-item"><i class="fas fa-database"></i><span>Cache hits</span><b>203</b></div>
-                                    <div class="ecg-item"><i class="fas fa-bolt"></i><span>Load time saved</span><b>&minus;1.3s</b></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feat-row">
-                        <div class="feat-card anim-reveal" style="--d:0s">
-                            <div class="feat-ico"><i class="fas fa-rocket"></i></div>
-                            <h4>Blazing Fast</h4>
-                            <p>Intelligent pre-loading reduces page load times by up to 60%.</p>
-                        </div>
-                        <div class="feat-card anim-reveal" style="--d:0.08s">
-                            <div class="feat-ico"><i class="fas fa-shield-alt"></i></div>
-                            <h4>Privacy Shield</h4>
-                            <p>Block trackers, ads, and invasive scripts automatically.</p>
-                        </div>
-                        <div class="feat-card anim-reveal" style="--d:0.16s">
-                            <div class="feat-ico"><i class="fas fa-chart-line"></i></div>
-                            <h4>Live Analytics</h4>
-                            <p>Real-time dashboards showing exactly what's happening on the page.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 2: PRODUCT — BETA DASHBOARD -->
-            <section class="slide" id="slide-2" data-index="2" data-label="Beta Dashboard">
-                <div class="slide-inner">
-                    <div class="glow-orb" style="top:50%;left:15%;width:400px;height:400px;opacity:0.18;"></div>
-
-                    <div class="two-col">
-                        <div class="col-text">
-                            <div class="prod-num anim-reveal">02</div>
-                            <div class="eyebrow anim-reveal"><span class="eyebrow-dot"></span> UI Design Extension</div>
-                            <h2 class="prod-title anim-reveal" style="--d:0.1s">
-                                Beta <span class="highlight-text">Dashboard</span>
-                            </h2>
-                            <p class="body-text anim-reveal" style="--d:0.2s">
-                                A minimalist design system overlay. Override any website's visual language with pixel-perfect precision — live, in the browser.
-                            </p>
-                            <button class="pill-btn anim-reveal" style="--d:0.3s" id="betaInstallBtn">
-                                <span class="pill-icon"><i class="fab fa-chrome" id="betaIcon"></i></span>
-                                <span class="pill-label" id="betaText">Download for Chrome</span>
-                                <span class="pill-arr"><i class="fas fa-arrow-right"></i></span>
-                            </button>
-                            <div class="stars-row anim-reveal" style="--d:0.4s">
-                                <div class="stars">
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <span>5.0 &middot; 890+ users</span>
-                            </div>
-                        </div>
-
-                        <div class="col-visual anim-reveal" style="--d:0.15s">
-                            <div class="ext-card-glass dashboard-glass">
-                                <div class="dg-top">
-                                    <span class="dg-name"><i class="fas fa-layer-group"></i> Beta Dashboard</span>
-                                    <span class="dg-live"><span class="live-dot"></span>Live</span>
-                                </div>
-                                <div class="dg-rows">
-                                    <div class="dg-row">
-                                        <span class="dg-lbl">Theme</span>
-                                        <div class="dg-pills">
-                                            <span class="dgp active">Dark</span>
-                                            <span class="dgp">Light</span>
-                                            <span class="dgp">Auto</span>
-                                        </div>
-                                    </div>
-                                    <div class="dg-row">
-                                        <span class="dg-lbl">Font Family</span>
-                                        <span class="dg-mono">Syne / DM Sans</span>
-                                    </div>
-                                    <div class="dg-row">
-                                        <span class="dg-lbl">Border Radius</span>
-                                        <div class="dg-slider-wrap">
-                                            <div class="dg-slider"><div class="dg-thumb" style="left:40%"></div></div>
-                                            <span class="dg-mono">8px</span>
-                                        </div>
-                                    </div>
-                                    <div class="dg-row">
-                                        <span class="dg-lbl">Contrast</span>
-                                        <div class="dg-bar"><div class="dg-bar-f" style="width:74%"></div></div>
-                                        <span class="dg-mono">74%</span>
-                                    </div>
-                                </div>
-                                <div class="dg-swatches">
-                                    <span style="background:var(--accent)"></span>
-                                    <span style="background:#1a1a1a"></span>
-                                    <span style="background:#333"></span>
-                                    <span style="background:#fff"></span>
-                                    <span style="background:#888"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="feat-row">
-                        <div class="feat-card anim-reveal" style="--d:0s">
-                            <div class="feat-ico"><i class="fas fa-paint-brush"></i></div>
-                            <h4>Custom Themes</h4>
-                            <p>Override any site's design with pixel-perfect precision.</p>
-                        </div>
-                        <div class="feat-card anim-reveal" style="--d:0.08s">
-                            <div class="feat-ico"><i class="fas fa-mouse-pointer"></i></div>
-                            <h4>Visual Editor</h4>
-                            <p>Point-and-click live CSS editing — no code needed.</p>
-                        </div>
-                        <div class="feat-card anim-reveal" style="--d:0.16s">
-                            <div class="feat-ico"><i class="fas fa-cloud-upload-alt"></i></div>
-                            <h4>Cloud Sync</h4>
-                            <p>Your design settings follow you across every device seamlessly.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SLIDE 3: CONTACT / GLOBAL FOOTER -->
-            <section class="slide" id="slide-3" data-index="3" data-label="Contact">
-                <div class="slide-inner footer-slide">
-                    <div class="glow-orb" style="top:30%;left:45%;width:500px;height:500px;opacity:0.15;"></div>
-
-                    <div class="footer-layout">
-                        <div class="footer-brand-col">
-                            <div class="footer-logo anim-reveal">
-                                <span class="logo-bracket">&lt;</span>Spi7<span class="logo-dot">.</span>Dev<span class="logo-bracket">/&gt;</span>
-                            </div>
-                            <p class="footer-tagline anim-reveal" style="--d:0.1s">
-                                Premium developer tools<br>for the modern web.
-                            </p>
-                            <div class="avail-badge anim-reveal" style="--d:0.2s">
-                                <span class="avail-dot"></span> Available for freelance
-                            </div>
-                            <div class="footer-socials anim-reveal" style="--d:0.3s">
-                                <a href="#" class="fsoc"><i class="fab fa-github"></i></a>
-                                <a href="#" class="fsoc"><i class="fab fa-twitter"></i></a>
-                                <a href="#" class="fsoc"><i class="fab fa-linkedin"></i></a>
-                            </div>
-                            <div class="footer-nav anim-reveal" style="--d:0.4s">
-                                <a href="#">Privacy Policy</a>
-                                <a href="#">Terms of Service</a>
-                            </div>
-                        </div>
-
-                        <div class="footer-form-col">
-                            <h3 class="contact-head anim-reveal">
-                                Let's Work <span class="highlight-text">Together</span>
-                            </h3>
-                            <p class="body-text anim-reveal" style="--d:0.1s">
-                                Drop a message — I'll get back to you within 24 hours.
-                            </p>
-                            <form class="cform anim-reveal" style="--d:0.2s" onsubmit="handleFormSubmit(event)">
-                                <div class="cform-row">
-                                    <div class="cfield">
-                                        <input type="text" class="cinput" placeholder=" " id="fn" autocomplete="off">
-                                        <label for="fn">Your name</label>
-                                    </div>
-                                    <div class="cfield">
-                                        <input type="email" class="cinput" placeholder=" " id="fe" autocomplete="off">
-                                        <label for="fe">Email address</label>
-                                    </div>
-                                </div>
-                                <div class="cfield">
-                                    <textarea class="cinput ctextarea" placeholder=" " id="fm"></textarea>
-                                    <label for="fm">Your message</label>
-                                </div>
-                                <button type="submit" class="pill-btn">
-                                    <span class="pill-icon"><i class="fas fa-paper-plane"></i></span>
-                                    <span class="pill-label">Send Message</span>
-                                    <span class="pill-arr"><i class="fas fa-arrow-right"></i></span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-
-                    <div class="footer-bar">
-                        <span>&copy; 2025 Spi7.Dev &middot; All rights reserved</span>
-                        <a href="mailto:hello@spi7.dev">hello@spi7.dev</a>
-                    </div>
-                </div>
-            </section>
-
-        </div><!-- /slider-track -->
-    </div><!-- /slider-viewport -->
-
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
