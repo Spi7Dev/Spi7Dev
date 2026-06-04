@@ -297,9 +297,6 @@
             let pressStartTime = 0;
             let currentDirection = 0;
             let startAngleForPress = 0;
-            
-            let isAutoRotating = true;
-            let autoRotationSpeed = -0.5; // Negative for clockwise rotation
 
             function updateItemStyles() {
                 for (let i = 0; i < numItems; i++) {
@@ -335,15 +332,6 @@
                     rafId = requestAnimationFrame(animate);
                 }
             }
-            
-            function autoAnimate() {
-                if (isAutoRotating) {
-                    currentAngle += autoRotationSpeed;
-                    spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
-                    updateItemStyles();
-                    rafId = requestAnimationFrame(autoAnimate);
-                }
-            }
 
             function snappyEase(t) {
                 // Modified for a more "mechanical" feel
@@ -353,6 +341,25 @@
             let snapStartTime = 0;
             let snapStartAngle = 0;
             const snapDuration = 400; 
+
+            let rouletteRafId = null;
+            let rouletteSpeed = -20; 
+            const rouletteFriction = 0.985; 
+
+            function playRoulette() {
+                currentAngle += rouletteSpeed;
+                spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+                updateItemStyles();
+                
+                rouletteSpeed *= rouletteFriction;
+
+                if (Math.abs(rouletteSpeed) > 0.5) {
+                    rouletteRafId = requestAnimationFrame(playRoulette);
+                } else {
+                    targetAngle = Math.round(currentAngle / angle) * angle;
+                    snapToTarget();
+                }
+            }
 
             function snapToTarget() {
                 snapStartTime = performance.now();
@@ -382,9 +389,9 @@
             const nextBtn = document.getElementById('next-btn');
 
             function startRotation(dir) {
-                if (isAutoRotating) {
-                    isAutoRotating = false;
-                    cancelAnimationFrame(rafId);
+                if (rouletteRafId) {
+                    cancelAnimationFrame(rouletteRafId);
+                    rouletteRafId = null;
                 }
                 cancelAnimationFrame(snapRafId);
                 if (!isRotating) {
@@ -425,7 +432,9 @@
             // Initial setup
             spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
             updateItemStyles();
-            autoAnimate();
+            
+            // Start roulette on load
+            playRoulette();
         });
     </script>
 </body></html>
