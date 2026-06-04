@@ -343,7 +343,8 @@
             const snapDuration = 400; 
 
             let rouletteRafId = null;
-            let rouletteSpeed = -20; 
+            // Random initial speed between -15 and -35 for a random stopping point
+            let rouletteSpeed = -(15 + Math.random() * 20); 
             const rouletteFriction = 0.985; 
 
             function playRoulette() {
