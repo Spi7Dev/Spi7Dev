@@ -297,6 +297,9 @@
             let pressStartTime = 0;
             let currentDirection = 0;
             let startAngleForPress = 0;
+            
+            let isAutoRotating = true;
+            let autoRotationSpeed = -0.5; // Negative for clockwise rotation
 
             function updateItemStyles() {
                 for (let i = 0; i < numItems; i++) {
@@ -330,6 +333,15 @@
                     spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
                     updateItemStyles();
                     rafId = requestAnimationFrame(animate);
+                }
+            }
+            
+            function autoAnimate() {
+                if (isAutoRotating) {
+                    currentAngle += autoRotationSpeed;
+                    spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+                    updateItemStyles();
+                    rafId = requestAnimationFrame(autoAnimate);
                 }
             }
 
@@ -370,6 +382,10 @@
             const nextBtn = document.getElementById('next-btn');
 
             function startRotation(dir) {
+                if (isAutoRotating) {
+                    isAutoRotating = false;
+                    cancelAnimationFrame(rafId);
+                }
                 cancelAnimationFrame(snapRafId);
                 if (!isRotating) {
                     isRotating = true;
@@ -409,6 +425,7 @@
             // Initial setup
             spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
             updateItemStyles();
+            autoAnimate();
         });
     </script>
 </body></html>
