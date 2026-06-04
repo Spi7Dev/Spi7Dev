@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LOVTEREST — SPI7.DEV</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "primary-container": "#ffcc00",
+                "on-primary-fixed": "#1a1a1a",
+                "surface-variant": "#e8e3da",
+                "on-surface": "#1a1a1a",
+                "surface-dim": "#d6d1c9",
+                "primary-fixed": "#ffcc00",
+                "inverse-on-surface": "#f5f0e8",
+                "inverse-surface": "#1a1a1a",
+                "surface-tint": "#1a1a1a",
+                "background": "#f5f0e8",
+                "on-secondary": "#1a1a1a",
+                "surface-bright": "#faf7f2",
+                "primary": "#1a1a1a",
+                "outline": "#1a1a1a",
+                "on-error": "#ffffff",
+                "on-secondary-fixed-variant": "#1a1a1a",
+                "error-container": "#ffdad6",
+                "secondary-container": "#ffdad6",
+                "secondary-fixed-dim": "#ffb3ab",
+                "on-secondary-fixed": "#1a1a1a",
+                "primary-fixed-dim": "#e6b800",
+                "surface": "#f5f0e8",
+                "on-background": "#1a1a1a",
+                "tertiary": "#0055ff",
+                "on-primary-container": "#1a1a1a",
+                "on-primary": "#ffffff",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#d6e3ff",
+                "on-tertiary-container": "#1a1a1a",
+                "surface-container-low": "#f2ede5",
+                "error": "#cc0000",
+                "surface-container-highest": "#e2ddd4",
+                "secondary": "#e63b2e",
+                "secondary-fixed": "#ffdad6",
+                "inverse-primary": "#f5f0e8",
+                "on-primary-fixed-variant": "#1a1a1a",
+                "tertiary-container": "#d6e3ff",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-fixed-variant": "#1a1a1a",
+                "surface-container": "#eee9e0",
+                "on-tertiary-fixed": "#1a1a1a",
+                "outline-variant": "#d0cbc3",
+                "on-tertiary": "#ffffff",
+                "tertiary-fixed-dim": "#a8c6ff",
+                "surface-container-high": "#e8e3da",
+                "on-secondary-container": "#1a1a1a",
+                "on-surface-variant": "#4a4a4a"
+            },
+            "borderRadius": {
+                "DEFAULT": "0px",
+                "lg": "0px",
+                "xl": "0px",
+                "full": "0px"
+            },
+            "fontFamily": {
+                "headline": ["Space Grotesk"],
+                "display": ["Space Grotesk"],
+                "body": ["Inter"],
+                "label": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .neo-shadow {
+            box-shadow: 6px 6px 0px 0px #1a1a1a;
+        }
+        .neo-shadow-active {
+            box-shadow: 2px 2px 0px 0px #1a1a1a;
+            transform: translate(4px, 4px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f5f0e8;
+            color: #1a1a1a;
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body class="bg-background selection:bg-primary-container selection:text-primary overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-background dark:bg-background border-b-4 border-primary dark:border-primary-fixed flex justify-between items-center w-full px-6 py-4 max-w-full sticky top-0 z-50">
+<div class="text-2xl font-headline font-black text-primary dark:text-primary-fixed tracking-tighter">SPI7.DEV</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-headline uppercase font-bold tracking-tighter text-primary dark:text-primary-fixed hover:text-secondary transition-colors duration-100" href="#">FOCUSFLOW</a>
+<a class="font-headline uppercase font-bold tracking-tighter text-primary dark:text-primary-fixed hover:text-secondary transition-colors duration-100" href="#">COLORCRAFT</a>
+<a class="font-headline uppercase font-bold tracking-tighter text-primary dark:text-primary-fixed hover:text-secondary transition-colors duration-100" href="#">CONTEXTME</a>
+</nav>
+<button class="bg-primary text-background px-6 py-2 font-headline font-black uppercase border-2 border-primary hover:bg-background hover:text-primary transition-all active:translate-x-1 active:translate-y-1">START PROJECT</button>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="min-h-[819px] flex flex-col items-center justify-center text-center px-6 py-20 bg-background relative overflow-hidden">
+<!-- Bauhaus Decorative Elements -->
+<div class="absolute top-20 left-10 w-32 h-32 border-4 border-primary rounded-full opacity-20 hidden lg:block"></div>
+<div class="absolute bottom-20 right-10 w-48 h-48 bg-primary-container opacity-20 hidden lg:block"></div>
+<h1 class="text-7xl md:text-9xl font-black tracking-tighter mb-4 text-primary relative">
+                LOVTEREST
+                <span class="absolute -top-4 -right-8 text-secondary text-4xl transform rotate-12">❤️</span>
+</h1>
+<p class="text-2xl md:text-3xl font-bold uppercase tracking-widest text-secondary mb-8">Love Pins for Pinterest</p>
+<div class="max-w-3xl mb-12">
+<p class="text-lg md:text-xl font-medium leading-relaxed">
+                    Take your Pinterest experience to the next level with lovterest! Inspired by the seamless interaction of your favorite social apps, lovterest allows you to "Love" any Pin instantly without the hassle of opening it or navigating through menus.
+                </p>
+</div>
+<div class="flex flex-col md:flex-row gap-6"><button class="bg-primary text-background border-4 border-primary px-10 py-5 font-headline font-black text-xl neo-shadow hover:neo-shadow-active transition-all uppercase flex items-center gap-3" id="dynamic-browser-cta-hero"><span class="material-symbols-outlined">download</span><span id="hero-cta-text">GET EXTENSION</span></button><script> (function() { const btn = document.getElementById('dynamic-browser-cta-hero'); const text = document.getElementById('hero-cta-text'); const icon = btn.querySelector('.material-symbols-outlined'); if (navigator.userAgent.indexOf('Chrome') !== -1) { text.innerText = 'GET ON CHROME'; icon.innerText = 'browser_updated'; } else if (navigator.userAgent.indexOf('Firefox') !== -1) { text.innerText = 'GET ON FIREFOX'; icon.innerText = 'captive_portal'; } })(); </script></div>
+</section>
+<!-- Video/Demo Container -->
+<section class="px-6 py-12 max-w-7xl mx-auto">
+<div class="border-8 border-primary neo-shadow bg-surface-dim relative overflow-hidden aspect-video flex items-center justify-center group cursor-pointer">
+<img class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500" data-alt="A cinematic, high-contrast product demonstration video frame showing a stylized Pinterest interface on a large computer monitor. The surrounding workspace is a clean, neo-brutalist home office with sharp lines, a bold yellow lamp, and minimal decor. The lighting is dramatic, high-key, casting sharp black shadows on a warm paper-colored wall. The overall aesthetic is graphic, raw, and modern with a focus on functional beauty." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9OTkz2AMlFV0jNZ9BZRR49te-7aJ6zLiMaqUGk_2bzxqNQ4osN7NhSWahmnz2_cQdHY4SZu2rUbgDxfrKRPudpr3TNP2Y8RNli5LdMPdV-VjDPTauUOGKaAmMVC70SBnpPOTaH-Q-dvkrCuGtaDIvsGfTEDlqcz863qkPeqhbrnYZ-ZnLZNTsjQMSyqYV5rYkuZHfinaDYimIX8oGcufRpB9e33Fzq-3o6CfrO9MQPYjrkQ4yckZT8DefTyjEGYtJaWL5Lk_z5br8"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center bg-primary/20 group-hover:bg-transparent transition-all">
+<div class="w-24 h-24 bg-primary text-background rounded-full flex items-center justify-center border-4 border-primary transform group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-5xl">play_arrow</span>
+</div>
+<span class="mt-4 font-headline font-black bg-primary text-background px-4 py-1 uppercase tracking-tighter">WATCH EXTENSION IN ACTION</span>
+</div>
+</div>
+</section>
+<!-- Feature Breakdown (Bento Grid) -->
+<section class="px-6 py-20 max-w-7xl mx-auto">
+<h2 class="text-5xl md:text-7xl font-black mb-16 text-center tracking-tighter">THE TOOLKIT</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="md:col-span-2 bg-primary-container border-4 border-primary p-8 neo-shadow flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-6xl mb-4">touch_app</span>
+<h3 class="text-3xl font-black mb-4 leading-none">Double-Tap to Love</h3>
+<p class="text-lg font-bold">Just double-click on any Pin image to instantly react with a "Love" heart. Just like Instagram! No more digging through sub-menus.</p>
+</div>
+<div class="mt-8 border-t-2 border-primary pt-4 flex justify-between items-center">
+<span class="font-black uppercase tracking-tighter">FEATURE 01</span>
+<span class="material-symbols-outlined">trending_flat</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-tertiary text-background border-4 border-primary p-8 neo-shadow">
+<span class="material-symbols-outlined text-6xl mb-4">ads_click</span>
+<h3 class="text-3xl font-black mb-4 leading-none">Quick Access Button</h3>
+<p class="font-medium">A beautifully designed, custom red button overlaid directly on every Pin card for one-click access. Effortless interaction at your fingertips.</p>
+</div>
+<!-- Card 3 -->
+<div class="bg-background border-4 border-primary p-8 neo-shadow">
+<span class="material-symbols-outlined text-6xl mb-4" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<h3 class="text-3xl font-black mb-4 leading-none">Lightning Fast</h3>
+<p class="font-medium">No need to open Pins or wait for pages to load. React directly from your feed and save time. Designed for power users.</p>
+</div>
+<!-- Card 4 -->
+<div class="bg-secondary text-background border-4 border-primary p-8 neo-shadow">
+<span class="material-symbols-outlined text-6xl mb-4">favorite</span>
+<h3 class="text-3xl font-black mb-4 leading-none">Beautiful Animations</h3>
+<p class="font-medium">Enjoy a satisfying, smooth heart-burst animation every time you love a Pin. Visual feedback that feels like a reward.</p>
+</div>
+<!-- Card 5 -->
+<div class="bg-background border-4 border-primary p-8 neo-shadow">
+<span class="material-symbols-outlined text-6xl mb-4">shield_with_heart</span>
+<h3 class="text-3xl font-black mb-4 leading-none">100% Private &amp; Secure</h3>
+<p class="font-medium">lovterest works entirely inside your browser. No data collection or tracking. Your privacy is non-negotiable.</p>
+</div>
+<!-- Card 6 -->
+<div class="md:col-span-2 bg-surface-container border-4 border-primary p-8 neo-shadow flex flex-col md:flex-row gap-8 items-center">
+<div class="flex-1">
+<span class="material-symbols-outlined text-6xl mb-4">toggle_on</span>
+<h3 class="text-3xl font-black mb-4 leading-none">Easy to Toggle</h3>
+<p class="font-bold">Comes with a sleek, macOS-style glassmorphism popup to easily enable or disable the extension functions globally or per session.</p>
+</div>
+<div class="w-full md:w-1/3 aspect-square border-4 border-primary bg-white/40 backdrop-blur-md p-4 flex flex-col justify-center items-center text-center">
+<div class="w-12 h-6 bg-secondary border-2 border-primary rounded-full relative mb-2">
+<div class="absolute right-1 top-1 w-3 h-3 bg-white rounded-full"></div>
+</div>
+<span class="text-xs font-black uppercase">SYSTEM ACTIVE</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Comparison Section -->
+<section class="px-6 py-20 bg-primary text-background">
+<div class="max-w-5xl mx-auto">
+<h2 class="text-5xl md:text-7xl font-black mb-16 text-center tracking-tighter">THE UPGRADE</h2>
+<div class="border-4 border-background overflow-hidden">
+<!-- Table Header -->
+<div class="grid grid-cols-3 border-b-4 border-background bg-primary-container text-primary">
+<div class="p-6 border-r-4 border-background font-black uppercase">METRIC</div>
+<div class="p-6 border-r-4 border-background font-black uppercase">WITHOUT LOVTEREST</div>
+<div class="p-6 font-black uppercase">WITH LOVTEREST</div>
+</div>
+<!-- Table Row 1 -->
+<div class="grid grid-cols-3 border-b-2 border-background">
+<div class="p-6 border-r-4 border-background font-black uppercase bg-primary-container/10">REACTING</div>
+<div class="p-6 border-r-4 border-background opacity-60 italic">Click pin, wait for page to load, find the reaction button, click it, go back to feed.</div>
+<div class="p-6 bg-secondary font-black text-xl flex items-center gap-2">
+                             INSTANT <span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<!-- Table Row 2 -->
+<div class="grid grid-cols-3 border-b-2 border-background">
+<div class="p-6 border-r-4 border-background font-black uppercase bg-primary-container/10">INTERACTION</div>
+<div class="p-6 border-r-4 border-background opacity-60 italic">Multiple clicks + 5-10 seconds of context switching.</div>
+<div class="p-6 bg-tertiary font-black text-xl flex items-center gap-2">
+                             1 TAP <span class="material-symbols-outlined">bolt</span>
+</div>
+</div>
+<!-- Table Row 3 -->
+<div class="grid grid-cols-3">
+<div class="p-6 border-r-4 border-background font-black uppercase bg-primary-container/10">USER JOY</div>
+<div class="p-6 border-r-4 border-background opacity-60 italic">Frustratingly slow for large inspiration boards.</div>
+<div class="p-6 bg-primary-container text-primary font-black text-xl flex items-center gap-2">
+                             UNLIMITED ❤️
+                        </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="px-6 py-32 flex flex-col items-center justify-center text-center">
+<h2 class="text-6xl md:text-8xl font-black mb-12 tracking-tighter">READY TO FALL<br/>IN LOVE?</h2>
+<div class="flex flex-wrap justify-center gap-8"><a class="group relative" href="#" id="dynamic-browser-cta-footer"><div class="absolute inset-0 bg-primary translate-x-3 translate-y-3 transition-transform group-hover:translate-x-0 group-hover:translate-y-0"></div><div class="relative bg-primary-container border-4 border-primary px-12 py-6 font-black text-2xl uppercase flex items-center gap-3"><span class="material-symbols-outlined">download</span><span id="footer-cta-text">GET EXTENSION</span></div></a><script> (function() { const text = document.getElementById('footer-cta-text'); const icon = document.querySelector('#dynamic-browser-cta-footer .material-symbols-outlined'); if (navigator.userAgent.indexOf('Chrome') !== -1) { text.innerText = 'GET CHROME EXTENSION'; icon.innerText = 'browser_updated'; } else if (navigator.userAgent.indexOf('Firefox') !== -1) { text.innerText = 'GET FIREFOX ADD-ON'; icon.innerText = 'captive_portal'; } })(); </script></div>
+<p class="mt-12 font-headline font-black uppercase opacity-60 tracking-widest">v2.4.0 — STABLE RELEASE</p>
+</section>
+<section class="px-6 py-20 max-w-5xl mx-auto bg-surface-container border-4 border-primary neo-shadow mb-20 text-left" id="legal">
+    <div class="mb-16">
+        <h2 class="text-4xl md:text-5xl font-black mb-8 tracking-tighter uppercase border-b-4 border-primary pb-4">Privacy Policy</h2>
+        <p class="font-bold opacity-60 mb-8 uppercase tracking-widest">Effective Date: June 4, 2026</p>
+        
+        <div class="space-y-6 font-medium text-lg leading-relaxed">
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">1. Introduction</h3>
+                <p>Welcome to lovterest. We are committed to protecting your privacy. This Privacy Policy explains how our Chrome Extension handles your data. We built this extension with a strict privacy-first approach: we do not collect, store, or share your personal data.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">2. Information We Do Not Collect</h3>
+                <p>In compliance with the Google Chrome Web Store Policies, we explicitly state that:</p>
+                <ul class="list-disc list-inside mt-2 space-y-2 ml-4">
+                    <li>We do not collect any personally identifiable information (PII).</li>
+                    <li>We do not track your browsing history outside of Pinterest.com.</li>
+                    <li>We do not log your interactions, clicks, or the pins you like.</li>
+                    <li>We do not use analytics trackers or third-party tracking scripts.</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">3. How the Extension Works (Local Data Only)</h3>
+                <p>The lovterest extension operates entirely within your browser:</p>
+                <ul class="list-disc list-inside mt-2 space-y-2 ml-4">
+                    <li><span class="font-bold">Storage:</span> The extension uses Chrome's local storage solely to save your preference of whether the extension is enabled or disabled, and to temporarily cache the API endpoint required to perform the "Love" action.</li>
+                    <li><span class="font-bold">Network Requests:</span> The extension communicates directly and only with Pinterest's official servers (pinterest.com) on your behalf when you interact with a Pin. No data is ever routed through any external third-party servers.</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">4. Permissions We Require</h3>
+                <ul class="list-disc list-inside mt-2 space-y-2 ml-4 font-mono text-sm bg-background p-4 border-2 border-primary">
+                    <li>storage: Required to save your extension toggle state.</li>
+                    <li>*://*.pinterest.com/*: Required to overlay the custom heart button and interact with the Pinterest interface.</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">5. Third-Party Sharing</h3>
+                <p>Because we do not collect any user data, we have absolutely no data to sell, trade, or rent to third parties.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">6. Contact Us</h3>
+                <p>If you have any questions or concerns about this Privacy Policy, please contact us at: <a href="mailto:spi7spi7spi7@gmail.com" class="font-bold text-secondary hover:underline">spi7spi7spi7@gmail.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h2 class="text-4xl md:text-5xl font-black mb-8 tracking-tighter uppercase border-b-4 border-primary pb-4">Terms of Use</h2>
+        <p class="font-bold opacity-60 mb-8 uppercase tracking-widest">Effective Date: June 4, 2026</p>
+        
+        <div class="space-y-6 font-medium text-lg leading-relaxed">
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">1. Acceptance of Terms</h3>
+                <p>By downloading, installing, and using the lovterest Chrome Extension, you agree to be bound by these Terms of Use.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">2. Description of Service</h3>
+                <p>lovterest is a browser extension designed to enhance the user experience on Pinterest by providing a "double-tap to love" functionality and a custom interaction button.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">3. User Responsibilities & Conduct</h3>
+                <p>By using the Extension, you agree that:</p>
+                <ul class="list-disc list-inside mt-2 space-y-2 ml-4">
+                    <li>You will not use the Extension for any malicious purposes, including but not limited to spamming, scraping, or violating Pinterest's own Terms of Service.</li>
+                    <li>You are solely responsible for your interactions on Pinterest when using the Extension. The Extension simply automates the "Love" action on your behalf based on your direct input.</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">4. Disclaimer of Warranties</h3>
+                <p class="bg-background p-4 border-2 border-primary uppercase font-bold text-sm">THE EXTENSION IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTY OF ANY KIND. Because the Extension relies on the structure of the Pinterest website, changes made by Pinterest to their platform may cause the Extension to temporarily or permanently stop functioning.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">5. Limitation of Liability</h3>
+                <p>To the maximum extent permitted by law, the developers of lovterest shall not be liable for any indirect, incidental, special, or consequential damages resulting from your use or inability to use the Extension, or any changes Pinterest makes that affect the functionality of the Extension.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">6. Affiliation</h3>
+                <p>lovterest is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Pinterest, Inc. The name "Pinterest" as well as related names, marks, emblems, and images are registered trademarks of their respective owners.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-2xl font-black uppercase mb-2">7. Contact Information</h3>
+                <p>If you have any questions about these Terms, please contact us at: <a href="mailto:spi7spi7spi7@gmail.com" class="font-bold text-secondary hover:underline">spi7spi7spi7@gmail.com</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background dark:bg-background border-t-4 border-primary dark:border-primary-fixed flex flex-col items-center justify-center w-full text-center px-4 py-12">
+<div class="text-4xl font-headline font-black text-primary mb-4 tracking-tighter">SPI7.DEV</div>
+<div class="flex flex-wrap justify-center gap-8 mb-8">
+<a class="font-body uppercase text-sm font-bold text-primary hover:text-secondary hover:underline decoration-2 transition-all" href="#">GITHUB</a>
+<a class="font-body uppercase text-sm font-bold text-primary hover:text-secondary hover:underline decoration-2 transition-all" href="#">DOCUMENTATION</a>
+<a class="font-body uppercase text-sm font-bold text-primary hover:text-secondary hover:underline decoration-2 transition-all" href="#">TWITTER</a>
+<a class="font-body uppercase text-sm font-bold text-primary hover:text-secondary hover:underline decoration-2 transition-all" href="#">CONTACT</a>
+</div>
+<p class="font-body uppercase text-xs font-bold text-primary opacity-60 tracking-widest">©2024 SPI7.DEV — FORM FOLLOWS FUNCTION</p>
+</footer>
+<script>
+        // Simple micro-interactions
+        document.querySelectorAll('.neo-shadow').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'translate(4px, 4px)';
+                card.style.boxShadow = '2px 2px 0px 0px #1a1a1a';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'translate(0px, 0px)';
+                card.style.boxShadow = '6px 6px 0px 0px #1a1a1a';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translate(0px, 0px)';
+                card.style.boxShadow = '6px 6px 0px 0px #1a1a1a';
+            });
+        });
+
+        // Hover effect for the video placeholder text
+        const demoContainer = document.querySelector('.aspect-video');
+        if(demoContainer) {
+            demoContainer.addEventListener('mouseenter', () => {
+                console.log('User curious about demo');
+            });
+        }
+    </script>
+</body></html>

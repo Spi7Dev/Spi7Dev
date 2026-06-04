@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Spi7.Dev - Developer-First Extensions</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&amp;family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-container": "#d6e3ff",
+                        "outline-variant": "#d0cbc3",
+                        "outline": "#1a1a1a",
+                        "surface-container-highest": "#e2ddd4",
+                        "on-surface": "#1a1a1a",
+                        "surface": "#f5f0e8",
+                        "secondary-fixed-dim": "#ffb3ab",
+                        "primary": "#1a1a1a",
+                        "on-background": "#1a1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#1a1a1a",
+                        "surface-tint": "#1a1a1a",
+                        "surface-variant": "#e8e3da",
+                        "primary-fixed": "#ffcc00",
+                        "on-secondary-fixed": "#1a1a1a",
+                        "surface-container-low": "#f2ede5",
+                        "surface-container-high": "#e8e3da",
+                        "on-tertiary-fixed-variant": "#1a1a1a",
+                        "surface-dim": "#d6d1c9",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#0055ff",
+                        "secondary": "#e63b2e",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#faf7f2",
+                        "on-secondary-fixed-variant": "#1a1a1a",
+                        "inverse-surface": "#1a1a1a",
+                        "on-tertiary-container": "#1a1a1a",
+                        "tertiary-fixed-dim": "#a8c6ff",
+                        "on-secondary": "#1a1a1a",
+                        "on-secondary-container": "#1a1a1a",
+                        "background": "#f5f0e8",
+                        "surface-container": "#eee9e0",
+                        "inverse-primary": "#f5f0e8",
+                        "secondary-fixed": "#ffdad6",
+                        "primary-container": "#ffcc00",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#f5f0e8",
+                        "error": "#cc0000",
+                        "on-surface-variant": "#4a4a4a",
+                        "on-primary-container": "#1a1a1a",
+                        "secondary-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed-variant": "#1a1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#e6b800",
+                        "tertiary-fixed": "#d6e3ff",
+                        "on-tertiary-fixed": "#1a1a1a",
+                        "surface-border": "#1a1a1a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "display": ["Space Grotesk"],
+                        "body": ["Space Grotesk"],
+                        "label": ["Space Grotesk"]
+                    },
+                    spacing: {
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "gutter": "24px"
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .bg-grid-pattern {
+                background-image: linear-gradient(to right, #1a1a1a 1px, transparent 1px),
+                                  linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+                background-size: 40px 40px;
+                opacity: 0.05;
+            }
+            .brutalist-shadow {
+                box-shadow: 8px 8px 0px 0px #1a1a1a;
+            }
+            .brutalist-shadow-hover:hover {
+                box-shadow: 4px 4px 0px 0px #1a1a1a;
+                transform: translate(2px, 2px);
+            }
+            .perspective-1000 {
+                perspective: 1000px;
+            }
+            .preserve-3d {
+                transform-style: preserve-3d;
+            }
+            .neo-card {
+                border: 4px solid #1a1a1a;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface border-b-4 border-surface-border">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Brand -->
+<a class="font-display text-2xl md:text-3xl font-bold text-on-surface uppercase tracking-tighter flex items-center gap-1" href="#">
+                Spi7<span class="text-secondary">.Dev</span>
+</a>
+<!-- Navigation Links (Desktop) -->
+<div class="hidden md:flex items-center gap-gutter">
+<a class="text-on-surface font-bold uppercase tracking-widest text-sm hover:bg-primary-container px-3 py-1 transition-colors" href="#">FocusFlow</a>
+<a class="text-on-surface font-bold uppercase tracking-widest text-sm hover:bg-primary-container px-3 py-1 transition-colors" href="#">ColorCraft</a>
+<a class="text-on-surface font-bold uppercase tracking-widest text-sm hover:bg-primary-container px-3 py-1 transition-colors" href="#">ContextMe</a>
+<a class="text-on-surface p-1 border-2 border-surface-border hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined">code</span>
+</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-on-surface">
+<span class="material-symbols-outlined text-3xl">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pb-24 px-margin-mobile md:px-margin-desktop relative overflow-hidden pt-32">
+<div class="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
+<div class="max-w-container-max mx-auto relative z-10">
+<!-- Hero Section -->
+<section class="text-center mb-16 flex flex-col items-center">
+<div class="inline-flex items-center px-4 py-1.5 border-2 border-surface-border bg-primary-container text-on-surface font-bold text-xs uppercase tracking-[0.2em] mb-8">
+                    Spi7.Dev Studio
+                </div>
+<h1 class="font-display text-6xl md:text-[100px] leading-[0.9] font-bold text-on-surface mb-6 max-w-4xl tracking-tighter uppercase">
+                    Vibe Coding<br/><span class="text-secondary">Meow.</span>
+</h1>
+<p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto mb-12 border-l-4 border-secondary pl-6 text-left">
+                    {Form follows function through a midlife crisis. Bold extensions for raw performance.}
+                </p>
+</section>
+<!-- Extensions 3D Carousel -->
+<div class="relative group/carousel max-w-[1200px] mx-auto h-[650px] flex items-center justify-center perspective-1000 select-none px-4">
+<!-- Navigation Arrows -->
+<button class="absolute top-1/2 -translate-y-1/2 z-30 w-16 h-16 border-4 border-surface-border bg-surface text-on-surface flex items-center justify-center hover:bg-primary-container transition-all brutalist-shadow-hover -left-4 md:-left-12" id="prev-btn">
+<span class="material-symbols-outlined text-4xl font-bold">arrow_back</span>
+</button>
+<button class="absolute top-1/2 -translate-y-1/2 z-30 w-16 h-16 border-4 border-surface-border bg-surface text-on-surface flex items-center justify-center hover:bg-primary-container transition-all brutalist-shadow-hover -right-4 md:-right-12" id="next-btn">
+<span class="material-symbols-outlined text-4xl font-bold">arrow_forward</span>
+</button>
+<!-- Carousel Container -->
+<div class="relative w-full max-w-[440px] h-[550px] preserve-3d transition-transform duration-75" id="carousel-spinner">
+<!-- FocusFlow Card -->
+<div class="carousel-item neo-card w-full h-full p-8 bg-surface flex flex-col shadow-[8px_8px_0px_0px_#1a1a1a]" style="position: absolute; top: 0; left: 0;">
+<div class="h-32 mb-8 border-4 border-surface-border bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-secondary">bolt</span>
+</div>
+<h3 class="font-display text-4xl font-bold text-on-surface mb-4 uppercase tracking-tighter italic">FocusFlow</h3>
+<p class="text-on-surface-variant font-body mb-8 flex-grow text-lg leading-snug">
+                            Deep work analysis and performance mapping directly in your browser workflow.
+                        </p>
+<div class="mt-auto">
+<div class="inline-flex items-center px-4 py-2 border-2 border-surface-border text-on-surface font-bold text-sm uppercase tracking-widest bg-primary-container">
+                                Productivity
+                            </div>
+</div>
+</div>
+<!-- ColorCraft Card -->
+<div class="carousel-item neo-card w-full h-full p-8 bg-surface flex flex-col shadow-[8px_8px_0px_0px_#1a1a1a]" style="position: absolute; top: 0; left: 0;">
+<div class="h-32 mb-8 border-4 border-surface-border bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-tertiary">palette</span>
+</div>
+<h3 class="font-display text-4xl font-bold text-on-surface mb-4 uppercase tracking-tighter italic">ColorCraft</h3>
+<p class="text-on-surface-variant font-body mb-8 flex-grow text-lg leading-snug">
+                            Premium color extraction and harmony generator for modern web designers.
+                        </p>
+<div class="mt-auto">
+<div class="inline-flex items-center px-4 py-2 border-2 border-surface-border text-on-surface font-bold text-sm uppercase tracking-widest bg-primary-container">
+                                Design
+                            </div>
+</div>
+</div>
+<!-- ContextMe Card -->
+<a href="./contextme_smart_browser_detection_button/" class="carousel-item neo-card w-full h-full p-8 bg-surface flex flex-col shadow-[8px_8px_0px_0px_#1a1a1a] block hover:text-on-surface" style="position: absolute; top: 0; left: 0;">
+<div class="h-32 mb-8 border-4 border-surface-border bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-secondary">psychology</span>
+</div>
+<h3 class="font-display text-4xl font-bold text-on-surface mb-4 uppercase tracking-tighter italic">ContextMe</h3>
+<p class="text-on-surface-variant font-body mb-8 flex-grow text-lg leading-snug">
+                            AI-powered tab organization that understands your project context automatically.
+                        </p>
+<div class="mt-auto">
+<div class="inline-flex items-center px-4 py-2 border-2 border-surface-border text-on-surface font-bold text-sm uppercase tracking-widest bg-primary-container">
+                                AI Support
+                            </div>
+</div>
+</a>
+<a href="./lovterest_smart_browser_detection_button/" class="carousel-item neo-card w-full h-full p-8 bg-surface flex flex-col shadow-[8px_8px_0px_0px_#1a1a1a] block hover:text-on-surface" style="position: absolute; top: 0; left: 0;"><div class="h-32 mb-8 border-4 border-surface-border bg-surface-container flex items-center justify-center"><span class="material-symbols-outlined text-6xl text-secondary">favorite</span></div><h3 class="font-display text-4xl font-bold text-on-surface mb-4 uppercase tracking-tighter italic">LOVTEREST</h3><p class="text-on-surface-variant font-body mb-8 flex-grow text-lg leading-snug">Love Pins for Pinterest ❤️</p><div class="mt-auto"><div class="inline-flex items-center px-4 py-2 border-2 border-surface-border text-on-surface font-bold text-sm uppercase tracking-widest bg-primary-container">SOCIAL</div></div></a>
+<!-- StreamLine -->
+<div class="carousel-item neo-card w-full h-full p-8 bg-surface-container flex flex-col shadow-[8px_8px_0px_0px_#1a1a1a]" style="position: absolute; top: 0; left: 0;">
+<div class="h-32 mb-8 border-4 border-surface-border bg-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-on-surface-variant/30">hourglass_empty</span>
+</div>
+<h3 class="font-display text-4xl font-bold text-on-surface-variant/50 mb-4 uppercase tracking-tighter italic">StreamLine</h3>
+<p class="text-on-surface-variant/50 font-body mb-8 flex-grow text-lg leading-snug">
+                            Next-generation asset delivery optimization for heavy applications.
+                        </p>
+<div class="mt-auto">
+<div class="inline-flex items-center px-4 py-2 border-2 border-surface-border/20 text-on-surface-variant/40 font-bold text-sm uppercase tracking-widest">
+                                Coming Soon
+                            </div>
+</div>
+</div>
+<!-- CodeDiff -->
+<div class="carousel-item neo-card w-full h-full p-8 bg-surface-container flex flex-col shadow-[8px_8px_0px_0px_#1a1a1a]" style="position: absolute; top: 0; left: 0;">
+<div class="h-32 mb-8 border-4 border-surface-border bg-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-on-surface-variant/30">terminal</span>
+</div>
+<h3 class="font-display text-4xl font-bold text-on-surface-variant/50 mb-4 uppercase tracking-tighter italic">CodeDiff</h3>
+<p class="text-on-surface-variant/50 font-body mb-8 flex-grow text-lg leading-snug">
+                            Collaborative code review extension with native Git integration.
+                        </p>
+<div class="mt-auto">
+<div class="inline-flex items-center px-4 py-2 border-2 border-surface-border/20 text-on-surface-variant/40 font-bold text-sm uppercase tracking-widest">
+                                Coming Soon
+                            </div>
+</div>
+</div>
+<!-- NetMock -->
+<div class="carousel-item neo-card w-full h-full p-8 bg-surface-container flex flex-col shadow-[8px_8px_0px_0px_#1a1a1a]" style="position: absolute; top: 0; left: 0;">
+<div class="h-32 mb-8 border-4 border-surface-border bg-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-6xl text-on-surface-variant/30">api</span>
+</div>
+<h3 class="font-display text-4xl font-bold text-on-surface-variant/50 mb-4 uppercase tracking-tighter italic">NetMock</h3>
+<p class="text-on-surface-variant/50 font-body mb-8 flex-grow text-lg leading-snug">
+                            Advanced network request interception and mocking for development.
+                        </p>
+<div class="mt-auto">
+<div class="inline-flex items-center px-4 py-2 border-2 border-surface-border/20 text-on-surface-variant/40 font-bold text-sm uppercase tracking-widest">
+                                Coming Soon
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-16 bg-surface border-t-8 border-surface-border mt-auto relative z-20">
+<div class="flex flex-col items-center justify-center px-margin-mobile md:px-margin-desktop gap-12 max-w-container-max mx-auto text-center">
+<a class="font-display text-4xl text-on-surface font-bold tracking-tighter flex items-center gap-1 uppercase" href="#">
+                Spi7<span class="text-secondary">.Dev</span>
+</a>
+<div class="flex flex-wrap justify-center gap-x-12 gap-y-6">
+<a class="font-bold text-on-surface hover:text-secondary hover:underline underline-offset-8 decoration-4 transition-all uppercase tracking-widest" href="#">HOME</a>
+<a class="font-bold text-on-surface hover:text-secondary hover:underline underline-offset-8 decoration-4 transition-all uppercase tracking-widest" href="#">FOCUSFLOW</a>
+<a class="font-bold text-on-surface hover:text-secondary hover:underline underline-offset-8 decoration-4 transition-all uppercase tracking-widest" href="#">COLORCRAFT</a>
+<a class="font-bold text-on-surface hover:text-secondary hover:underline underline-offset-8 decoration-4 transition-all uppercase tracking-widest" href="#">CONTEXTME</a>
+<a class="font-bold text-on-surface hover:text-secondary hover:underline underline-offset-8 decoration-4 transition-all uppercase tracking-widest" href="#">PRIVACY</a>
+</div>
+<div class="font-bold text-sm text-on-surface-variant uppercase tracking-[0.3em] mt-4 py-2 px-4 border-2 border-surface-border">
+                © 2024 Spi7.Dev — Functional Aesthetics.
+            </div>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const spinner = document.getElementById('carousel-spinner');
+            const items = document.querySelectorAll('.carousel-item');
+            const numItems = items.length;
+            const angle = 360 / numItems;
+            const radius = 480; 
+
+            // Initialize item positions
+            for (let i = 0; i < numItems; i++) {
+                items[i].style.transform = `rotateY(${i * angle}deg) translateZ(${radius}px)`;
+            }
+
+            let currentAngle = 0;
+            let targetAngle = 0;
+            let isRotating = false;
+            let rotationSpeed = 0;
+            let rafId;
+            let snapRafId;
+            let pressStartTime = 0;
+            let currentDirection = 0;
+            let startAngleForPress = 0;
+
+            function updateItemStyles() {
+                for (let i = 0; i < numItems; i++) {
+                    const item = items[i];
+                    let itemAngle = i * angle;
+                    let effectiveAngle = (itemAngle + currentAngle) % 360;
+                    if (effectiveAngle < 0) effectiveAngle += 360;
+                    
+                    let distanceFromFront = Math.min(effectiveAngle, 360 - effectiveAngle);
+                    
+                    // Brutalist fading: either solid or deeply recessed
+                    if (distanceFromFront < 45) {
+                        item.style.opacity = "1";
+                        item.style.pointerEvents = 'auto';
+                        item.style.filter = "grayscale(0%)";
+                    } else if (distanceFromFront < 120) {
+                        item.style.opacity = "0.7";
+                        item.style.pointerEvents = 'none';
+                        item.style.filter = "grayscale(50%)";
+                    } else {
+                        item.style.opacity = "0.2";
+                        item.style.pointerEvents = 'none';
+                        item.style.filter = "grayscale(100%)";
+                    }
+                }
+            }
+
+            function animate() {
+                if (isRotating) {
+                    currentAngle += rotationSpeed;
+                    spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+                    updateItemStyles();
+                    rafId = requestAnimationFrame(animate);
+                }
+            }
+
+            function snappyEase(t) {
+                // Modified for a more "mechanical" feel
+                return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+            }
+
+            let snapStartTime = 0;
+            let snapStartAngle = 0;
+            const snapDuration = 400; 
+
+            function snapToTarget() {
+                snapStartTime = performance.now();
+                snapStartAngle = currentAngle;
+                
+                function step(currentTime) {
+                    const elapsed = currentTime - snapStartTime;
+                    const progress = Math.min(elapsed / snapDuration, 1);
+                    const ease = snappyEase(progress);
+                    
+                    currentAngle = snapStartAngle + (targetAngle - snapStartAngle) * ease;
+                    spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+                    updateItemStyles();
+                    
+                    if (progress < 1) {
+                        snapRafId = requestAnimationFrame(step);
+                    } else {
+                        currentAngle = targetAngle;
+                        spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+                        updateItemStyles();
+                    }
+                }
+                snapRafId = requestAnimationFrame(step);
+            }
+
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+
+            function startRotation(dir) {
+                cancelAnimationFrame(snapRafId);
+                if (!isRotating) {
+                    isRotating = true;
+                    rotationSpeed = dir * 2.5;
+                    currentDirection = dir;
+                    startAngleForPress = Math.round(currentAngle / angle) * angle;
+                    pressStartTime = Date.now();
+                    animate();
+                }
+            }
+
+            function stopRotation() {
+                if (!isRotating) return;
+                isRotating = false;
+                cancelAnimationFrame(rafId);
+                
+                const pressDuration = Date.now() - pressStartTime;
+                
+                if (pressDuration < 250) {
+                    targetAngle = startAngleForPress + currentDirection * angle;
+                } else {
+                    targetAngle = Math.round(currentAngle / angle) * angle;
+                }
+                snapToTarget();
+            }
+
+            ['mousedown', 'touchstart'].forEach(evt => {
+                prevBtn.addEventListener(evt, (e) => { e.preventDefault(); startRotation(-1); });
+                nextBtn.addEventListener(evt, (e) => { e.preventDefault(); startRotation(1); });
+            });
+
+            ['mouseup', 'mouseleave', 'touchend'].forEach(evt => {
+                prevBtn.addEventListener(evt, stopRotation);
+                nextBtn.addEventListener(evt, stopRotation);
+            });
+
+            // Initial setup
+            spinner.style.transform = `translateZ(${-radius}px) rotateY(${currentAngle}deg)`;
+            updateItemStyles();
+        });
+    </script>
+</body></html>
