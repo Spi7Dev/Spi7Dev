@@ -126,7 +126,21 @@
         #theme-toggle:hover { background-color: #ffcc00; }
         .dark #theme-toggle { border-color: #f5f0e8; color: #f5f0e8; }
         .dark #theme-toggle:hover { background-color: #2e2a20; }
+        
+        /* Text Reveal Custom CSS */
+        .text-reveal-char {
+            opacity: 0;
+            transform: translateY(20px);
+            display: inline-block;
+            transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .text-reveal-char.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-background selection:bg-primary-container selection:text-primary overflow-x-hidden">
 <!-- TopNavBar -->
@@ -147,7 +161,7 @@
 <!-- Bauhaus Decorative Elements -->
 <div class="absolute top-20 left-10 w-32 h-32 border-4 border-primary rounded-full opacity-20 hidden lg:block"></div>
 <div class="absolute bottom-20 right-10 w-48 h-48 bg-primary-container opacity-20 hidden lg:block"></div>
-<h1 class="text-7xl md:text-9xl font-black tracking-tighter mb-4 text-primary relative">
+<h1 class="text-7xl md:text-9xl font-black tracking-tighter mb-4 text-primary relative text-reveal">
                 LOVTEREST
                 <span class="absolute -top-4 -right-8 text-secondary text-4xl transform rotate-12">❤️</span>
 </h1>
@@ -160,7 +174,7 @@
 <div class="flex flex-col md:flex-row gap-6"><button class="bg-primary text-background border-4 border-primary px-10 py-5 font-headline font-black text-xl neo-shadow hover:neo-shadow-active transition-all uppercase flex items-center gap-3" id="dynamic-browser-cta-hero"><span class="material-symbols-outlined">download</span><span id="hero-cta-text">GET EXTENSION</span></button><script> (function() { const btn = document.getElementById('dynamic-browser-cta-hero'); const text = document.getElementById('hero-cta-text'); const icon = btn.querySelector('.material-symbols-outlined'); if (navigator.userAgent.indexOf('Chrome') !== -1) { text.innerText = 'GET ON CHROME'; icon.innerText = 'browser_updated'; } else if (navigator.userAgent.indexOf('Firefox') !== -1) { text.innerText = 'GET ON FIREFOX'; icon.innerText = 'captive_portal'; } })(); </script></div>
 </section>
 <!-- Video/Demo Container -->
-<section class="px-6 py-12 max-w-7xl mx-auto">
+<section class="px-6 py-12 max-w-7xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
 <div class="border-8 border-primary neo-shadow bg-surface-dim relative overflow-hidden aspect-video flex items-center justify-center group cursor-pointer">
 <img class="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-500" data-alt="A cinematic, high-contrast product demonstration video frame showing a stylized Pinterest interface on a large computer monitor. The surrounding workspace is a clean, neo-brutalist home office with sharp lines, a bold yellow lamp, and minimal decor. The lighting is dramatic, high-key, casting sharp black shadows on a warm paper-colored wall. The overall aesthetic is graphic, raw, and modern with a focus on functional beauty." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9OTkz2AMlFV0jNZ9BZRR49te-7aJ6zLiMaqUGk_2bzxqNQ4osN7NhSWahmnz2_cQdHY4SZu2rUbgDxfrKRPudpr3TNP2Y8RNli5LdMPdV-VjDPTauUOGKaAmMVC70SBnpPOTaH-Q-dvkrCuGtaDIvsGfTEDlqcz863qkPeqhbrnYZ-ZnLZNTsjQMSyqYV5rYkuZHfinaDYimIX8oGcufRpB9e33Fzq-3o6CfrO9MQPYjrkQ4yckZT8DefTyjEGYtJaWL5Lk_z5br8"/>
 <div class="absolute inset-0 flex flex-col items-center justify-center bg-primary/20 group-hover:bg-transparent transition-all">
@@ -174,7 +188,7 @@
 <!-- Feature Breakdown (Bento Grid) -->
 <section class="px-6 py-20 max-w-7xl mx-auto">
 <h2 class="text-5xl md:text-7xl font-black mb-16 text-center tracking-tighter">THE TOOLKIT</h2>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-duration="1000">
 <!-- Card 1 -->
 <div class="md:col-span-2 bg-primary-container border-4 border-primary p-8 neo-shadow flex flex-col justify-between">
 <div>
@@ -425,6 +439,67 @@
             const isDark = html.classList.contains('dark');
             applyTheme(!isDark);
             localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+        });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+        });
+
+        // Initialize Letter-by-Letter Text Reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            function wrapTextNodesWithRevealSpans(element) {
+                const childNodes = Array.from(element.childNodes);
+                childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        const text = node.textContent;
+                        if (text.trim().length > 0) {
+                            const fragment = document.createDocumentFragment();
+                            for (let i = 0; i < text.length; i++) {
+                                if (text[i] === '\n' || text[i] === '\r') {
+                                    continue;
+                                }
+                                const charSpan = document.createElement('span');
+                                charSpan.classList.add('text-reveal-char');
+                                if (text[i] === ' ') {
+                                    charSpan.innerHTML = '&nbsp;';
+                                } else {
+                                    charSpan.textContent = text[i];
+                                }
+                                fragment.appendChild(charSpan);
+                            }
+                            element.replaceChild(fragment, node);
+                        }
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        wrapTextNodesWithRevealSpans(node);
+                    }
+                });
+            }
+
+            const revealElements = document.querySelectorAll('.text-reveal');
+            revealElements.forEach(el => {
+                wrapTextNodesWithRevealSpans(el);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const chars = entry.target.querySelectorAll('.text-reveal-char');
+                        chars.forEach((char, index) => {
+                            setTimeout(() => {
+                                char.classList.add('revealed');
+                            }, index * 40);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => observer.observe(el));
         });
     </script>
 </body></html>

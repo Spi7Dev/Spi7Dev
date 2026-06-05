@@ -183,7 +183,21 @@
             background-color: #ffcc00;
         }
         body { transition: background-color 0.25s, color 0.25s; }
+        
+        /* Text Reveal Custom CSS */
+        .text-reveal-char {
+            opacity: 0;
+            transform: translateY(20px);
+            display: inline-block;
+            transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .text-reveal-char.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary-container">
 <!-- TopNavBar -->
@@ -218,7 +232,7 @@
 <div class="inline-flex items-center px-4 py-1.5 border-2 border-surface-border bg-primary-container text-on-surface font-bold text-xs uppercase tracking-[0.2em] mb-8">
                     Spi7.Dev Studio
                 </div>
-<h1 class="font-display text-6xl md:text-[100px] leading-[0.9] font-bold text-on-surface mb-6 max-w-4xl tracking-tighter uppercase">
+<h1 class="font-display text-6xl md:text-[100px] leading-[0.9] font-bold text-on-surface mb-6 max-w-4xl tracking-tighter uppercase text-reveal">
                     Vibe Coding<br/><span class="text-secondary">Meow.</span>
 </h1>
 <p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mx-auto mb-12 border-l-4 border-secondary pl-6 text-left">
@@ -226,7 +240,7 @@
                 </p>
 </section>
 <!-- Extensions 3D Carousel -->
-<div class="relative group/carousel max-w-[1200px] mx-auto h-[650px] flex items-center justify-center perspective-1000 select-none px-4">
+<div class="relative group/carousel max-w-[1200px] mx-auto h-[650px] flex items-center justify-center perspective-1000 select-none px-4" data-aos="fade-up" data-aos-duration="1000">
 <!-- Navigation Arrows -->
 <button class="absolute top-1/2 -translate-y-1/2 z-30 w-16 h-16 border-4 border-surface-border bg-surface text-on-surface flex items-center justify-center hover:bg-primary-container transition-all brutalist-shadow-hover -left-4 md:-left-12" id="prev-btn">
 <span class="material-symbols-outlined text-4xl font-bold">arrow_back</span>
@@ -536,6 +550,67 @@
             const isDark = html.classList.contains('dark');
             applyTheme(!isDark);
             localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+        });
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+        });
+
+        // Initialize Letter-by-Letter Text Reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            function wrapTextNodesWithRevealSpans(element) {
+                const childNodes = Array.from(element.childNodes);
+                childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        const text = node.textContent;
+                        if (text.trim().length > 0) {
+                            const fragment = document.createDocumentFragment();
+                            for (let i = 0; i < text.length; i++) {
+                                if (text[i] === '\n' || text[i] === '\r') {
+                                    continue;
+                                }
+                                const charSpan = document.createElement('span');
+                                charSpan.classList.add('text-reveal-char');
+                                if (text[i] === ' ') {
+                                    charSpan.innerHTML = '&nbsp;';
+                                } else {
+                                    charSpan.textContent = text[i];
+                                }
+                                fragment.appendChild(charSpan);
+                            }
+                            element.replaceChild(fragment, node);
+                        }
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        wrapTextNodesWithRevealSpans(node);
+                    }
+                });
+            }
+
+            const revealElements = document.querySelectorAll('.text-reveal');
+            revealElements.forEach(el => {
+                wrapTextNodesWithRevealSpans(el);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const chars = entry.target.querySelectorAll('.text-reveal-char');
+                        chars.forEach((char, index) => {
+                            setTimeout(() => {
+                                char.classList.add('revealed');
+                            }, index * 40); // 40ms stagger for typing effect
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => observer.observe(el));
         });
     </script>
 </body></html>
