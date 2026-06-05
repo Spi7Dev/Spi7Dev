@@ -570,23 +570,23 @@
                         const text = node.textContent;
                         if (text.trim().length > 0) {
                             const fragment = document.createDocumentFragment();
-                            const words = text.split(/(\s+)/);
-                            words.forEach(word => {
-                                if (word.trim().length > 0) {
+                            const condensed = text.replace(/\s+/g, ' ');
+                            const parts = condensed.split(/(\s+)/);
+                            parts.forEach(part => {
+                                if (part.length === 0) return;
+                                if (part === ' ') {
+                                    fragment.appendChild(document.createTextNode(' '));
+                                } else {
                                     const wordSpan = document.createElement('span');
                                     wordSpan.style.display = 'inline-block';
                                     wordSpan.style.whiteSpace = 'nowrap';
-                                    for (let i = 0; i < word.length; i++) {
+                                    for (let i = 0; i < part.length; i++) {
                                         const charSpan = document.createElement('span');
                                         charSpan.classList.add('text-reveal-char');
-                                        charSpan.textContent = word[i];
+                                        charSpan.textContent = part[i];
                                         wordSpan.appendChild(charSpan);
                                     }
                                     fragment.appendChild(wordSpan);
-                                } else {
-                                    const spaceSpan = document.createElement('span');
-                                    spaceSpan.innerHTML = word.replace(/ /g, '&nbsp;').replace(/\n/g, '');
-                                    fragment.appendChild(spaceSpan);
                                 }
                             });
                             element.replaceChild(fragment, node);
