@@ -195,6 +195,31 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Cat Paw Cursor Trail */
+        .cat-paw {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            transform-origin: center;
+        }
+        .paw-svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            color: #e63b2e;
+            opacity: 0;
+            animation: fadePaw 1.5s ease-out forwards;
+        }
+        .dark .paw-svg {
+            color: #ffcc00;
+        }
+        @keyframes fadePaw {
+            0% { opacity: 0; transform: scale(0.5); }
+            10% { opacity: 0.8; transform: scale(1.1); }
+            20% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
     </style>
     <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -617,6 +642,51 @@
             }, { threshold: 0.1 });
 
             revealElements.forEach(el => observer.observe(el));
+        });
+
+        // Cat Paw Mouse Trail
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastX = 0;
+            let lastY = 0;
+            let isLeftPaw = true;
+            const distanceThreshold = 40;
+            const pawSvg = `<svg class="paw-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M226.5 92.9c14.3 7.3 28.9 23 33.8 38.6 4.9 15.6 1.4 34.6-6.6 44.1-7.9 9.5-22.6 12.1-36.9 4.8-14.3-7.3-28.9-23-33.8-38.6-4.9-15.6-1.4-34.6 6.6-44.1 8-9.5 22.7-12.1 36.9-4.8zM140.2 165c14.5 5.5 30.7 18.9 37.8 34 7.1 15.1 4.9 33.9-2 41.5-6.9 7.6-20.3 9.4-34.8 3.9-14.5-5.5-30.7-18.9-37.8-34-7.1-15.1-4.9-33.9 2-41.5 6.9-7.5 20.3-9.3 34.8-3.9zM363.6 198.5c7.1-15.1 23.3-28.5 37.8-34 14.5-5.5 27.9-3.7 34.8 3.9 6.9 7.6 9.1 26.4 2 41.5-7.1 15.1-23.3 28.5-37.8 34-14.5 5.5-27.9 3.7-34.8-3.9-6.9-7.6-9.1-26.4-2-41.5zM286.2 92.5c14.3-7.3 28.9-4.7 36.9 4.8 7.9 9.5 11.4 28.5 6.6 44.1-4.9 15.6-19.5 31.3-33.8 38.6-14.3 7.3-28.9 4.7-36.9-4.8-7.9-9.5-11.4-28.5-6.6-44.1 4.9-15.6 19.5-31.3 33.8-38.6zM256 224c-68.5 0-112.9 41.4-124 93.9-8.4 40.1.7 83.2 24.3 107.5 22.8 23.6 61 31.4 99.7 31.4 38.7 0 76.9-7.8 99.7-31.4 23.6-24.3 32.7-67.4 24.3-107.5-11.1-52.5-55.5-93.9-124-93.9z"/></svg>`;
+
+            document.addEventListener('mousemove', (e) => {
+                const dx = e.clientX - lastX;
+                const dy = e.clientY - lastY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (lastX === 0 && lastY === 0) {
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    return;
+                }
+
+                if (distance > distanceThreshold) {
+                    const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+                    
+                    const paw = document.createElement('div');
+                    paw.className = 'cat-paw';
+                    paw.innerHTML = pawSvg;
+                    
+                    paw.style.left = `${e.clientX}px`;
+                    paw.style.top = `${e.clientY}px`;
+                    
+                    const offset = isLeftPaw ? -12 : 12;
+                    paw.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translateX(${offset}px)`;
+                    
+                    document.body.appendChild(paw);
+                    
+                    setTimeout(() => {
+                        paw.remove();
+                    }, 1500);
+                    
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    isLeftPaw = !isLeftPaw;
+                }
+            });
         });
     </script>
 </body></html>
