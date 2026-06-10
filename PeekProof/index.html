@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PeekProof - Privacy Extension</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e8e3da",
+                        "primary-fixed-dim": "#e6b800",
+                        "inverse-surface": "#1a1a1a",
+                        "inverse-on-surface": "#f5f0e8",
+                        "surface": "#f5f0e8",
+                        "primary": "#1a1a1a",
+                        "on-secondary": "#1a1a1a",
+                        "background": "#f5f0e8",
+                        "tertiary-fixed": "#d6e3ff",
+                        "secondary-fixed": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#1a1a1a",
+                        "surface-tint": "#1a1a1a",
+                        "surface-container-low": "#f2ede5",
+                        "secondary-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#1a1a1a",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#1a1a1a",
+                        "surface-dim": "#d6d1c9",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#a8c6ff",
+                        "surface-container-high": "#e8e3da",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#faf7f2",
+                        "on-secondary-fixed": "#1a1a1a",
+                        "tertiary-container": "#d6e3ff",
+                        "on-secondary-fixed-variant": "#1a1a1a",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#ffb3ab",
+                        "on-surface-variant": "#4a4a4a",
+                        "surface-container": "#eee9e0",
+                        "on-tertiary-container": "#1a1a1a",
+                        "on-tertiary-fixed": "#1a1a1a",
+                        "outline-variant": "#d0cbc3",
+                        "primary-container": "#ffcc00",
+                        "primary-fixed": "#ffcc00",
+                        "secondary": "#e63b2e",
+                        "on-surface": "#1a1a1a",
+                        "tertiary": "#0055ff",
+                        "error": "#cc0000",
+                        "surface-container-highest": "#e2ddd4",
+                        "on-background": "#1a1a1a",
+                        "on-secondary-container": "#1a1a1a",
+                        "inverse-primary": "#f5f0e8",
+                        "on-primary-fixed": "#1a1a1a",
+                        "outline": "#1a1a1a",
+                        "on-tertiary": "#ffffff",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": [
+                            "Space Grotesk"
+                        ],
+                        "display": [
+                            "Space Grotesk"
+                        ],
+                        "body": [
+                            "Inter"
+                        ],
+                        "label": [
+                            "Space Grotesk"
+                        ]
+                    },
+                    "fontSize": {}
+                },
+            },
+        }
+    </script>
+<style>
+        .bauhaus-border {
+            border: 4px solid #1a1a1a;
+        }
+        .dark .bauhaus-border {
+            border: 4px solid #f5f0e8;
+        }
+        .bauhaus-shadow {
+            box-shadow: 6px 6px 0px 0px #1a1a1a;
+        }
+        .dark .bauhaus-shadow {
+            box-shadow: 6px 6px 0px 0px #f5f0e8;
+        }
+        .bauhaus-hover:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px 0px #1a1a1a;
+        }
+        .dark .bauhaus-hover:hover {
+            box-shadow: 8px 8px 0px 0px #f5f0e8;
+        }
+        .bauhaus-active:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px 0px #1a1a1a;
+        }
+        .dark .bauhaus-active:active {
+            box-shadow: 2px 2px 0px 0px #f5f0e8;
+        }
+
+        /* Dark Mode Overrides */
+        .dark body { background-color: #1a1a1a; color: #f5f0e8; }
+        .dark .bg-background { background-color: #1a1a1a !important; }
+        .dark .bg-surface { background-color: #2a2a2a !important; }
+        .dark .bg-primary { background-color: #f5f0e8 !important; }
+        .dark .text-primary { color: #f5f0e8 !important; }
+        .dark .text-background { color: #1a1a1a !important; }
+        .dark .border-primary { border-color: #f5f0e8 !important; }
+        
+        /* Dark mode toggle button */
+        #theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 2px solid currentColor;
+            cursor: pointer;
+            transition: background-color 0.15s, color 0.15s;
+            flex-shrink: 0;
+            background-color: transparent;
+        }
+        .dark #theme-toggle { border-color: #f5f0e8; color: #f5f0e8; }
+        .dark #theme-toggle:hover { background-color: #2e2a20; }
+        #theme-toggle:hover { background-color: #ffcc00; }
+
+        /* Text Reveal Custom CSS */
+        .text-reveal-char {
+            opacity: 0;
+            transform: translateY(20px);
+            display: inline-block;
+            transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .text-reveal-char.revealed { opacity: 1; transform: translateY(0); }
+
+        /* Cat Paw Cursor Trail */
+        .cat-paw {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            transform-origin: center;
+        }
+        .paw-svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            color: #fabc02;
+            opacity: 0;
+            animation: fadePaw 1.5s ease-out forwards;
+        }
+        @keyframes fadePaw {
+            0% { opacity: 0; transform: scale(0.5); }
+            10% { opacity: 0.8; transform: scale(1.1); }
+            20% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+    </style>
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body class="bg-background text-primary font-body antialiased min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-background docked full-width top-0 border-b-4 border-primary flat no shadows sticky z-50">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-full">
+<a href="../index.html" class="text-2xl font-headline font-black text-primary uppercase tracking-tighter">
+                SPI7.DEV
+</a>
+<div class="hidden md:flex items-center gap-8 font-headline uppercase font-bold tracking-tighter">
+<a class="text-primary hover:text-secondary hover:bg-primary hover:text-background transition-colors duration-100 active:translate-x-1 active:translate-y-1 px-2 py-1" href="../index.html">FOCUSFLOW</a>
+<a class="text-secondary underline decoration-4 underline-offset-8 px-2 py-1" href="../PeekProof/">PEEKPROOF</a>
+<a class="text-primary hover:text-secondary hover:bg-primary hover:text-background transition-colors duration-100 active:translate-x-1 active:translate-y-1 px-2 py-1" href="../contextme/">CONTEXTME</a>
+<button id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+    <span class="material-symbols-outlined text-xl" id="theme-icon">dark_mode</span>
+</button>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" style="font-size: 2rem;">menu</span>
+</button>
+</div>
+</nav>
+<main class="flex-grow">
+<!-- Hero Section -->
+<section class="flex flex-col items-center justify-center text-center px-6 py-20 bg-background relative overflow-hidden mt-12" data-aos="fade-up">
+<h1 class="text-7xl md:text-9xl font-headline font-black tracking-tighter leading-none uppercase text-primary text-reveal">
+                    PEEK<br/>PROOF
+                </h1>
+<div class="max-w-3xl mb-12 mt-8">
+<p class="text-2xl md:text-3xl font-body font-medium leading-tight">
+                    Stealth mode for your browser. Hide sensitive UI elements from prying eyes.
+                </p>
+</div>
+<div class="flex flex-col md:flex-row gap-6 mb-16">
+<button class="bauhaus-border bauhaus-shadow bauhaus-hover bauhaus-active bg-primary-container text-primary font-headline font-bold text-xl px-10 py-5 uppercase transition-all flex items-center gap-3" id="install-btn">
+<span class="material-symbols-outlined" id="browser-icon">extension</span>
+<span id="btn-text">Download Extension</span>
+</button>
+</div>
+</section>
+<!-- Video/Demo Container -->
+<section class="px-6 py-12 max-w-7xl mx-auto mb-12">
+<div class="relative group cursor-pointer">
+<div class="bauhaus-border bauhaus-shadow bg-surface overflow-hidden aspect-video relative flex items-center justify-center">
+<img alt="Person watching video on laptop in public cafe" class="absolute inset-0 w-full h-full object-cover" data-alt="A close-up shot of a modern laptop screen displaying a video player in a busy, sunlit cafe. The video frame is partially obscured by a stark, pitch-black overlay graphic representing privacy. The scene is shot from an over-the-shoulder perspective, emphasizing the threat of shoulder surfing. The lighting is bright and natural, contrasting with the solid black geometric privacy shield on the screen." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAQ4EJqhAbzLFWXcCfVIftKxB_qbPGmtCu81cwFgIqOyLe-y3mdx3cqhr_YOlZj-TrnuyiaE3aU5Iy1WkdSKLEb9llRiwxysA1FquE7eIvt8Bwez_qoUe_fenX5viCqEUPA_ESxKC0XiKQ0hj5xuqlP-I1QMWU9U3y7l6SEnmxbzd9HlqtQ4UaJNHeZ3w_RSn3RKUlLJuD00z6tTkmfXLIugmekh57QnkzpqDv8SDvGfm1r5XP_37RDeof9PyRshtD0nNMTv5gWNg-Q"/>
+<div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<span class="material-symbols-outlined text-white text-6xl" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+</div>
+</div>
+</section>
+<!-- The Toolkit -->
+<section class="bg-primary text-background py-20 border-y-4 border-primary">
+<div class="container mx-auto px-6 max-w-7xl">
+<h2 class="text-5xl md:text-7xl font-headline font-black uppercase mb-16 tracking-tighter text-center text-reveal">The Toolkit</h2>
+<div class="grid md:grid-cols-2 gap-8">
+<!-- Feature 1 -->
+<div class="bg-surface text-primary p-8 bauhaus-border" data-aos="fade-up" data-aos-delay="0">
+<span class="material-symbols-outlined text-5xl text-secondary mb-6" style="font-variation-settings: 'FILL' 1;">pause_circle</span>
+<h3 class="text-3xl font-headline font-bold uppercase mb-4">Global Pause Shield</h3>
+<p class="text-lg font-body">Dynamic blackout overlay for paused videos. Keeps sensitive paused frames safe from prying eyes across all websites.</p>
+</div>
+<!-- Feature 2 -->
+<div class="bg-surface text-primary p-8 bauhaus-border" data-aos="fade-up" data-aos-delay="100">
+<span class="material-symbols-outlined text-5xl text-secondary mb-6" style="font-variation-settings: 'FILL' 1;">smart_display</span>
+<h3 class="text-3xl font-headline font-bold uppercase mb-4">Smart Endscreen Protection</h3>
+<p class="text-lg font-body">Hides the blackout shield and applies Thumbnail Protection automatically when a YouTube video ends.</p>
+</div>
+<!-- Feature 3 -->
+<div class="bg-surface text-primary p-8 bauhaus-border" data-aos="fade-up" data-aos-delay="200">
+<span class="material-symbols-outlined text-5xl text-secondary mb-6" style="font-variation-settings: 'FILL' 1;">blur_on</span>
+<h3 class="text-3xl font-headline font-bold uppercase mb-4">Thumbnail Shield</h3>
+<p class="text-lg font-body">Dual modes (Blur or Black) to obscure video thumbnails on YouTube. Integrated eye buttons for temporary reveal.</p>
+</div>
+<!-- Feature 4 -->
+<div class="bg-surface text-primary p-8 bauhaus-border" data-aos="fade-up" data-aos-delay="300">
+<span class="material-symbols-outlined text-5xl text-secondary mb-6" style="font-variation-settings: 'FILL' 1;">title</span>
+<h3 class="text-3xl font-headline font-bold uppercase mb-4">Stealth Title</h3>
+<p class="text-lg font-body">Sleek redacted style for titles, channel names, and avatars. Temporarily unredact for exactly 3 seconds.</p>
+</div>
+<!-- Feature 5 -->
+<div class="bg-surface text-primary p-8 bauhaus-border" data-aos="fade-up" data-aos-delay="400">
+<span class="material-symbols-outlined text-5xl text-secondary mb-6" style="font-variation-settings: 'FILL' 1;">forum</span>
+<h3 class="text-3xl font-headline font-bold uppercase mb-4">Comments Shield</h3>
+<p class="text-lg font-body">Hide distraction-heavy or spoiler-filled comments instantly. Toggles on a per-video basis.</p>
+</div>
+<!-- Feature 6 -->
+<div class="bg-surface text-primary p-8 bauhaus-border" data-aos="fade-up" data-aos-delay="500">
+<span class="material-symbols-outlined text-5xl text-secondary mb-6" style="font-variation-settings: 'FILL' 1;">sync</span>
+<h3 class="text-3xl font-headline font-bold uppercase mb-4">Seamless Sync</h3>
+<p class="text-lg font-body">Settings sync instantly across tabs and devices. Beautiful dark-themed popup interface with micro-animations.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- The Upgrade (Comparison Table) -->
+<section class="container mx-auto px-6 py-20 max-w-7xl" data-aos="fade-up">
+<h2 class="text-5xl md:text-7xl font-headline font-black uppercase mb-16 tracking-tighter text-center text-reveal">The Upgrade</h2>
+<div class="overflow-x-auto bauhaus-border bauhaus-shadow bg-surface">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary text-background font-headline text-xl uppercase">
+<th class="p-6 border-b-4 border-primary border-r-4">Metric</th>
+<th class="p-6 border-b-4 border-primary border-r-4">Without PeekProof</th>
+<th class="p-6 border-b-4 border-primary text-primary-container">With PeekProof</th>
+</tr>
+</thead>
+<tbody class="font-body text-lg">
+<tr>
+<td class="p-6 border-b-2 border-primary border-r-4 font-bold">Privacy</td>
+<td class="p-6 border-b-2 border-primary border-r-4 text-surface-variant line-through decoration-error decoration-2">Exposed frames</td>
+<td class="p-6 border-b-2 border-primary font-bold text-secondary">Total Blackout</td>
+</tr>
+<tr>
+<td class="p-6 border-b-2 border-primary border-r-4 font-bold">Shoulder Surfing</td>
+<td class="p-6 border-b-2 border-primary border-r-4 text-surface-variant line-through decoration-error decoration-2">Prying eyes</td>
+<td class="p-6 border-b-2 border-primary font-bold text-secondary">Stealth Reveal</td>
+</tr>
+<tr>
+<td class="p-6 border-r-4 border-primary font-bold">Distraction</td>
+<td class="p-6 border-r-4 border-primary text-surface-variant line-through decoration-error decoration-2">Spoiler comments</td>
+<td class="p-6 font-bold text-secondary">Clean UI</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background dark:bg-background full-width py-12 border-t-4 border-primary dark:border-primary-fixed flat no shadows">
+<div class="flex flex-col items-center justify-center w-full text-center px-4">
+<div class="text-4xl font-headline font-black text-primary mb-4 uppercase tracking-tighter">
+                SPI7.DEV
+            </div>
+<div class="flex flex-wrap justify-center gap-6 mb-8 font-body uppercase text-sm font-bold">
+<a class="text-primary hover:text-secondary hover:underline decoration-2" href="#">GITHUB</a>
+<a class="text-primary hover:text-secondary hover:underline decoration-2" href="#">DOCUMENTATION</a>
+<a class="text-primary hover:text-secondary hover:underline decoration-2" href="#">TWITTER</a>
+<a class="text-primary hover:text-secondary hover:underline decoration-2" href="#">CONTACT</a>
+</div>
+<div class="font-body uppercase text-sm font-bold text-primary opacity-60 tracking-widest">
+                ©2024 SPI7.DEV — FORM FOLLOWS FUNCTION
+            </div>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const ua = navigator.userAgent;
+            const btnText = document.getElementById('btn-text');
+            const browserIcon = document.getElementById('browser-icon');
+
+            if (ua.indexOf("Firefox") > -1) {
+                btnText.textContent = "Add to Firefox";
+                browserIcon.textContent = "public"; // Material doesn't have specific browser icons, using generic web
+            } else if (ua.indexOf("Chrome") > -1) {
+                btnText.textContent = "Add to Chrome";
+                browserIcon.textContent = "public";
+            } else {
+                 btnText.textContent = "Download Extension";
+            }
+        });
+
+        // ── Dark / Light Mode Toggle ──
+        const html = document.documentElement;
+        const toggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        function applyTheme(dark) {
+            if (dark) {
+                html.classList.add('dark');
+                if (themeIcon) themeIcon.textContent = 'light_mode';
+            } else {
+                html.classList.remove('dark');
+                if (themeIcon) themeIcon.textContent = 'dark_mode';
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        applyTheme(savedTheme === 'dark');
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                const isDark = html.classList.contains('dark');
+                applyTheme(!isDark);
+                localStorage.setItem('theme', !isDark ? 'dark' : 'light');
+            });
+        }
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+        });
+
+        // Initialize Letter-by-Letter Text Reveal
+        document.addEventListener('DOMContentLoaded', () => {
+            function wrapTextNodesWithRevealSpans(element) {
+                const childNodes = Array.from(element.childNodes);
+                childNodes.forEach(node => {
+                    if (node.nodeType === Node.TEXT_NODE) {
+                        const text = node.textContent;
+                        if (text.trim().length > 0) {
+                            const fragment = document.createDocumentFragment();
+                            const condensed = text.replace(/\s+/g, ' ');
+                            const parts = condensed.split(/(\s+)/);
+                            parts.forEach(part => {
+                                if (part.length === 0) return;
+                                if (part === ' ') {
+                                    fragment.appendChild(document.createTextNode(' '));
+                                } else {
+                                    const wordSpan = document.createElement('span');
+                                    wordSpan.style.display = 'inline-block';
+                                    wordSpan.style.whiteSpace = 'nowrap';
+                                    for (let i = 0; i < part.length; i++) {
+                                        const charSpan = document.createElement('span');
+                                        charSpan.classList.add('text-reveal-char');
+                                        charSpan.textContent = part[i];
+                                        wordSpan.appendChild(charSpan);
+                                    }
+                                    fragment.appendChild(wordSpan);
+                                }
+                            });
+                            element.replaceChild(fragment, node);
+                        }
+                    } else if (node.nodeType === Node.ELEMENT_NODE) {
+                        wrapTextNodesWithRevealSpans(node);
+                    }
+                });
+            }
+
+            const revealElements = document.querySelectorAll('.text-reveal');
+            revealElements.forEach(el => {
+                wrapTextNodesWithRevealSpans(el);
+            });
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const chars = entry.target.querySelectorAll('.text-reveal-char');
+                        chars.forEach((char, index) => {
+                            setTimeout(() => {
+                                char.classList.add('revealed');
+                            }, index * 40);
+                        });
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => observer.observe(el));
+        });
+
+        // Cat Paw Mouse Trail
+        document.addEventListener('DOMContentLoaded', () => {
+            let lastX = 0;
+            let lastY = 0;
+            let isLeftPaw = true;
+            const distanceThreshold = 40;
+            const pawSvg = `<svg class="paw-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><ellipse cx="36" cy="22" rx="11" ry="17" transform="rotate(-15 36 22)"/><ellipse cx="64" cy="22" rx="11" ry="17" transform="rotate(15 64 22)"/><ellipse cx="17" cy="46" rx="10" ry="14" transform="rotate(-35 17 46)"/><ellipse cx="83" cy="46" rx="10" ry="14" transform="rotate(35 83 46)"/><path d="M 50 38 C 42 38, 25 55, 15 72 C 5 88, 35 102, 50 85 C 65 102, 95 88, 85 72 C 75 55, 58 38, 50 38 Z"/></svg>`;
+
+            document.addEventListener('mousemove', (e) => {
+                const dx = e.clientX - lastX;
+                const dy = e.clientY - lastY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (lastX === 0 && lastY === 0) {
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    return;
+                }
+
+                if (distance > distanceThreshold) {
+                    const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+                    
+                    const paw = document.createElement('div');
+                    paw.className = 'cat-paw';
+                    paw.innerHTML = pawSvg;
+                    
+                    paw.style.left = `${e.clientX}px`;
+                    paw.style.top = `${e.clientY}px`;
+                    
+                    const offset = isLeftPaw ? -12 : 12;
+                    paw.style.transform = `translate(-50%, -50%) rotate(${angle}deg) translateX(${offset}px)`;
+                    
+                    document.body.appendChild(paw);
+                    
+                    setTimeout(() => {
+                        paw.remove();
+                    }, 1500);
+                    
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    isLeftPaw = !isLeftPaw;
+                }
+            });
+        });
+    </script>
+</body></html>
