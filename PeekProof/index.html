@@ -323,11 +323,25 @@
             
             <div>
                 <h3 class="text-2xl font-headline font-black uppercase mb-2">2. Permissions and Why We Need Them</h3>
-                <p>To provide its core functionality, PeekProof requests the following permissions upon installation. We strictly limit the use of these permissions to the features described below:</p>
+                <p>PeekProof requests the following permissions:</p>
                 <ul class="list-disc list-inside mt-2 space-y-2 ml-4 bg-background p-4 border-2 border-primary">
-                    <li><span class="font-mono text-sm">&lt;all_urls&gt;</span> (Read and change all your data on all websites): PeekProof’s "Pause Shield" feature automatically detects when a video is paused and covers the video frame to protect your privacy. Because videos can be embedded on any website across the internet (e.g., news sites, social media, blogs), PeekProof requires permission to monitor video elements on all websites you visit. We do not read your browsing history, intercept network requests, or read your personal data on these websites. The permission is used exclusively to find <code>&lt;video&gt;</code> tags and overlay them with a black screen when paused.</li>
-                    <li><span class="font-mono text-sm">storage</span>: Used solely to save your customized shield settings and synchronize them across your signed-in Chrome browsers.</li>
+                    <li>
+                        <span class="font-mono text-sm font-bold">storage</span>
+                        <p class="text-sm mt-1 ml-6 opacity-80">Used solely to save your customized shield settings and synchronize them across your signed-in Chrome browsers.</p>
+                    </li>
                 </ul>
+                
+                <h4 class="text-xl font-headline font-black uppercase mt-6 mb-2">Content Script Access (Specific Sites Only)</h4>
+                <p>PeekProof does NOT request access to all websites. The Extension's scripts run exclusively on a predefined list of supported video platforms, including YouTube, Vimeo, Netflix, Twitch, and others listed in the Extension's manifest. We do not run on any website outside this list.</p>
+                
+                <p class="mt-4">On these supported sites, the Extension:</p>
+                <ul class="list-disc list-inside mt-2 space-y-2 ml-4">
+                    <li>Detects <code>&lt;video&gt;</code> HTML elements to apply the Pause Shield overlay.</li>
+                    <li>Reads and modifies visual elements (thumbnails, titles) in your browser's DOM to apply the selected shield modes.</li>
+                    <li>On sites other than YouTube, the Extension also runs inside embedded video frames (iframes) to ensure the Pause Shield works on embedded players.</li>
+                </ul>
+                
+                <p class="mt-4">We do not read your browsing history, intercept network requests, read form data, or access any personal information on these websites.</p>
             </div>
             
             <div>
